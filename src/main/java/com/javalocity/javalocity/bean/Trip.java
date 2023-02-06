@@ -1,6 +1,8 @@
 package com.javalocity.javalocity.bean;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import java.util.Date;
 
