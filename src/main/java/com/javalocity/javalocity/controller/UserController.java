@@ -27,12 +27,25 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String submitRegistrationForm(@ModelAttribute User user) {
-        System.out.println(user);
-        String pw = passwordEncoder.encode(user.getPassword());
-        user.setPassword(pw);
-        userDao.save(user);
-        return "redirect:/login";
+    public String submitRegistrationForm(@ModelAttribute User user, Model model) {
+        boolean validInput = true;
+        if (userDao.findByUsername(user.getUsername()) != null){
+            validInput = false;
+            model.addAttribute("usernameAlreadyInUse", true);
+        } else if (userDao.findByEmail(user.getEmail()) != null){
+            validInput = false;
+            model.addAttribute("emailAlreadyInUse", true);
+        }
+        if (validInput){
+            System.out.println(user);
+            String pw = passwordEncoder.encode(user.getPassword());
+            user.setPassword(pw);
+            userDao.save(user);
+            return "redirect:/login";
+        } else {
+            return "/register";
+        }
+
     }
 
     @GetMapping("/login")
