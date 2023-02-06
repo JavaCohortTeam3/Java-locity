@@ -22,7 +22,7 @@ public class User {
     @Column (nullable = false, length = 100)
     private String password;
 
-    @Column (nullable = false, columnDefinition = "TEXT")
+    @Column (nullable = true, columnDefinition = "TEXT")
     private String profile_img;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
