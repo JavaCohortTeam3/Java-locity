@@ -3,6 +3,7 @@ package com.javalocity.javalocity.controller;
 import com.javalocity.javalocity.bean.User;
 import com.javalocity.javalocity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     @Autowired
     private UserRepository userDao;
-//    private PasswordEncoder passwordEncoder;
-
-//
-    public UserController(UserRepository userDao) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -27,7 +28,18 @@ public class UserController {
 
     @PostMapping("/register")
     public String submitRegistrationForm(@ModelAttribute User user) {
+        System.out.println(user);
+        String pw = passwordEncoder.encode(user.getPassword());
+        user.setPassword(pw);
         userDao.save(user);
-        return "redirect:/home";
+        return "redirect:/login";
     }
+
+    @GetMapping("/login")
+    public String loginPage(@ModelAttribute User user) {
+        return "/login";
+    }
+
+
+
 }
