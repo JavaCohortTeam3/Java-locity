@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "trips")
-public class Trips {
+@Table(name = "trip")
+public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,9 @@ public class Trips {
     @OneToOne
     private User user;
 
-    public Trips() {}
+    public Trip() {}
 
-    public Trips(long id, Date startDate, Date endDate, String name, String description, User user) {
+    public Trip(long id, Date startDate, Date endDate, String name, String description, User user) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
