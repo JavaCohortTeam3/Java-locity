@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
 //import org.springframework.security.crypto.password.PasswordEncoder;
 @Controller
 public class UserController {
@@ -16,10 +17,12 @@ public class UserController {
     private UserRepository userDao;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
@@ -53,6 +56,13 @@ public class UserController {
         return "/login";
     }
 
-
+    @GetMapping("/logout")
+    public String logoutPage(@ModelAttribute User user) {
+        return "/logout";
+    }
+    @GetMapping("/profile")
+    public String profilePage(@ModelAttribute User user) {
+        return "/profile";
+    }
 
 }
