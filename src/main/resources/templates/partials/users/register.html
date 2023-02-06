@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="partials/head :: header">
     <meta charset="UTF-8">
     <title>Join Us!</title>
 </head>
 <body class="container-fluid">
-<div class="container">
+<div>
     <h2>User Registration Form</h2>
     <form th:action="@{/register}" th:object="${user}" method="post">
         <div class="form-group">
