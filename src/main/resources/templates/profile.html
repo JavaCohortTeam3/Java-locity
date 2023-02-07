@@ -20,8 +20,18 @@
     <div class="row">
         <div class="col-md-4">
             <img src="{{profilePicture}}" alt="Profile Picture" class="profile-pic">
-            <h2 class="mb-3" th:text ="${username}"></h2>
-            <a class="btn btn-primary" href="/editProfile">Edit Profile</a>
+            <br>
+            User ID: <span th:text="${#authentication.principal.id}"/>
+            <br>
+            Username: <span th:text="${#authentication.principal.username}"/>
+            <br>
+            Email: <span th:text="${#authentication.principal.email}"/>
+            <br>
+            <form th:action="@{/profile/edit}" th:method="get">
+<!--                <input type="hidden" id="id" th:value="${#authentication.principal.id}">-->
+                <input class="btn btn-primary" type="submit" value="Edit Profile" />
+            </form>
+<!--            <a class="btn btn-primary" href="/profile/edit">Edit Profile</a>-->
         </div>
         <div class="col-md-8">
             <h5 class="text-secondary mb-3">Previous Planed Trips:</h5>
