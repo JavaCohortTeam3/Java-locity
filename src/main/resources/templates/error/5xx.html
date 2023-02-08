@@ -3,8 +3,9 @@
 <head>
 	<!--UPDATE THE TITLE-->
 	<title>ERROR!</title>
-	<div th:insert="~{partials :: header}" style="display: none"></div>
-	<link rel="stylesheet" th:href="@{/JS/location-viewer.css}">
+	<div class="head-div" th:insert="~{partials :: header}" style="display: none"></div>
+<!--	<div class="head-div" th:replace="~{partials :: css}" style="display: none"></div>-->
+	<link rel="stylesheet" th:href="@{/css/5xx-errorpage.css}">
 </head>
 <body>
 	<nav th:insert="~{partials :: navbar}"></nav>

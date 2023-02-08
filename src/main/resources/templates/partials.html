@@ -12,22 +12,22 @@
     <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
 </div>
 <body>
-<div class="container">
+<div class="container" style="color: lightgray">
     <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #0b3c5d;">
-        <a class="navbar-brand ms-1" th:href="@{/}"><img th:src="@{images/logo.png}" class="rounded" ></a>
+        <a class="navbar-brand ms-1" th:href="@{/}"><img th:src="@{images/logo.png}" style="border-radius: 5px"></a>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent" >
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" th:href="@{/trip/locations}">Plan a Trip</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/trip/locations}" style="color: lightgray">Plan a Trip</a></li>
             </ul>
             <ul class="navbar-nav mr-auto" sec:authorize="isAnonymous()">
-                <li class="nav-item"><a class="nav-link" th:href="@{/register}">Join Us</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/login}">Log In</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/register}" style="color: lightgray">Join Us</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/login}" style="color: lightgray">Log In</a></li>
             </ul>
             <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">
-                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile}" style="color: lightgray">Profile</a></li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">
-                        <button class="btn btn-transparent">Logout</button>
+                        <button class="btn btn-transparent" style="color: lightgray">Logout</button>
                     </form>
                 </li>
             </ul>
