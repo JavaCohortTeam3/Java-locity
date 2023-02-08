@@ -102,15 +102,21 @@ public class UserController {
 //        model.addAttribute("trip", trip);
 //    }
 
-    @GetMapping("/profile/edit")
-    public String editProfileGet(Model model) {
+    @GetMapping("/account/info")
+    public String accountInfoGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
-        return "/editProfile";
+        return "accountInfo";
+    }
+    @GetMapping("/account/edit")
+    public String editAccountGet(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        return "accountEdit";
     }
 
-    @PostMapping("/profile/edit")
-    public String editProfilePost(@ModelAttribute User user, Model model) {
+    @PostMapping("/account/edit")
+    public String editAccountPost(@ModelAttribute User user, Model model) {
         User oldUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String oldUsername = oldUser.getUsername();
         String oldEmail = oldUser.getEmail();
@@ -139,7 +145,7 @@ public class UserController {
             userDao.save(user);
             return "redirect:/login?logout";
         } else {
-            return "/editProfile";
+            return "accountEdit";
         }
     }
 }

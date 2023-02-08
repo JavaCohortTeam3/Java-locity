@@ -25,6 +25,7 @@
             </ul>
             <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">
                 <li class="nav-item"><a class="nav-link" th:href="@{/profile}" style="color: lightgray">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/account/info}" style="color: lightgray">Account Info</a></li>
                 <li class="nav-item">
                     <form th:action="@{/logout}" th:method="post">
                         <button class="btn btn-transparent" style="color: lightgray">Logout</button>
