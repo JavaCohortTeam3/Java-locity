@@ -17,6 +17,6 @@
 </form>
 <div id='map' style='width: 80vw; height: 80vh; margin: auto'></div>
 <footer th:replace="~{partials :: footer}"></footer>
-<script type="text/javascript" th:src="@{/JS/locationAPIcall.js}"></script>
+<script th:inline="javascript" type="text/javascript" th:src="@{/JS/locationAPIcall.js}"></script>
 </body>
 </html>

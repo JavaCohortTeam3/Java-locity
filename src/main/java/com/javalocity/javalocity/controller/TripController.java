@@ -29,4 +29,16 @@ public class TripController {
 
         return "/trip-details";
     }
+    @PostMapping("/trip/details")
+    public String setDetails(@RequestParam("idd") int id, HttpSession session) {
+        System.out.println(id);
+        session.setAttribute("id", id);
+        return "redirect:/location/viewer";
+    }
+
+    @GetMapping("/location/viewer")
+    public String view(HttpSession session, Model model) {
+        model.addAttribute("id", session.getAttribute("id"));
+        return "/location-viewer";
+    }
 }

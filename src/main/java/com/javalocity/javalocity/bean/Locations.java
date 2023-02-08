@@ -7,80 +7,70 @@ import org.w3c.dom.Text;
 public class Locations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long location_id;
+    private long id;
 
+    @Column
+    private String location_id;
     @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false, length = 100)
-    private String description;
+    private double distance;
 
     @Column(nullable = false, length = 100)
-    private String web_url;
+    private String bearing;
+
+    @Column(nullable = false, length = 100)
+    private String street1;
+
+    @Column(nullable = false)
+    private String street2;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false, length = 100)
+    private String state;
+
+    @Column(nullable = false, length = 100)
+    private String country;
+
+    @Column(nullable = false, length = 100)
+    private String postalcode;
 
     @Column(nullable = false, length = 100)
     private String address_string;
 
-    @Column(nullable = false)
-    private double latitude;
-
-    @Column(nullable = false)
-    private double longitude;
-
-    @Column(nullable = false, length = 100)
-    private String timezone;
-
-    @Column(nullable = false, length = 100)
-    private String email;
-
-    @Column(nullable = false, length = 100)
-    private String phone;
-
-    @Column(nullable = false, length = 100)
-    private String website;
-
-    @Column
-    private int rating;
-
-    @Column(columnDefinition = "TEXT")
-    private String weekday_text;
-
-    @Column(columnDefinition = "TEXT")
-    private String amenities;
-
-    @Column(columnDefinition = "TEXT")
-    private String cuisine;
-
-    @Column(nullable = false, length = 100)
-    private String category_name;
-
-    public Locations(String name, String description, String web_url, String address_string, double latitude, double longitude, String timezone, String email, String phone, String website, int rating, String weekday_text, String amenities, String cuisine, String category_name) {
+    public Locations(String location_id, String name, double distance, String bearing, String street1, String street2, String city, String state, String country, String postalcode, String address_string) {
+        this.location_id = location_id;
         this.name = name;
-        this.description = description;
-        this.web_url = web_url;
+        this.distance = distance;
+        this.bearing = bearing;
+        this.street1 = street1;
+        this.street2 = street2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.postalcode = postalcode;
         this.address_string = address_string;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.timezone = timezone;
-        this.email = email;
-        this.phone = phone;
-        this.website = website;
-        this.rating = rating;
-        this.weekday_text = weekday_text;
-        this.amenities = amenities;
-        this.cuisine = cuisine;
-        this.category_name = category_name;
     }
 
     public Locations() {
-
     }
 
-    public long getLocation_id() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLocation_id() {
         return location_id;
     }
 
-    public void setLocation_id(long location_id) {
+    public void setLocation_id(String location_id) {
         this.location_id = location_id;
     }
 
@@ -92,20 +82,68 @@ public class Locations {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public double getDistance() {
+        return distance;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
-    public String getWeb_url() {
-        return web_url;
+    public String getBearing() {
+        return bearing;
     }
 
-    public void setWeb_url(String web_url) {
-        this.web_url = web_url;
+    public void setBearing(String bearing) {
+        this.bearing = bearing;
+    }
+
+    public String getStreet1() {
+        return street1;
+    }
+
+    public void setStreet1(String street1) {
+        this.street1 = street1;
+    }
+
+    public String getStreet2() {
+        return street2;
+    }
+
+    public void setStreet2(String street2) {
+        this.street2 = street2;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getPostalcode() {
+        return postalcode;
+    }
+
+    public void setPostalcode(String postalcode) {
+        this.postalcode = postalcode;
     }
 
     public String getAddress_string() {
@@ -114,93 +152,5 @@ public class Locations {
 
     public void setAddress_string(String address_string) {
         this.address_string = address_string;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getWeekday_text() {
-        return weekday_text;
-    }
-
-    public void setWeekday_text(String weekday_text) {
-        this.weekday_text = weekday_text;
-    }
-
-    public String getAmenities() {
-        return amenities;
-    }
-
-    public void setAmenities(String amenities) {
-        this.amenities = amenities;
-    }
-
-    public String getCuisine() {
-        return cuisine;
-    }
-
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
-
-    public String getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
     }
 }

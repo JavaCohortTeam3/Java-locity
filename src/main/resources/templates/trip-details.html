@@ -6,8 +6,21 @@
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
-<input type="hidden" th:value="${location}">
+<input type="hidden" th:value="${location}" id="hidden">
+<select name="details" id="details">
+    <option value=""></option>
+    <option value="restaurants">Restaurants</option>
+    <option value="hotels">Hotels</option>
+    <option value="attractions">Attractions</option>
+</select>
+<form th:action="@{/trip/details}" th:method="post">
+<div id="holder"></div>
+</form>
 
+<!--<div style="width:100%; padding-bottom:56.25%; position:relative;">-->
+<!--    <iframe src="https://www.tripadvisor.com/Restaurant_Review-g31281-d530838-Reviews-Mangos_Mexican_Cafe-Mesa_Arizona.html#photos" style="position:absolute; top:0px; left:0px;-->
+<!--  width:100%; height:100%; border: none; overflow: hidden;"></iframe>-->
+<!--        </div>-->
 <footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
@@ -16,6 +29,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/JS/locationDetails.js}"></script>
 
 </body>
 </html>
