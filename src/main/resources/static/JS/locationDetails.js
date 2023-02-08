@@ -1,7 +1,7 @@
 let html = "";
 let array = []
 function getDetails(lat, long, details) {
-    const options = {method: 'GET', headers: {accept: 'application/jsonp'}};
+    const options = {method: 'GET', headers: {accept: 'application/json'}};
     console.log(details);
     fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${lat}%2C${long}&key=36086683E4694CAFBB45F4197D8AE5D4&category=${details}&radius=25&radiusUnit=mi&language=en`, options)
         .then(response => response.json())
@@ -9,9 +9,9 @@ function getDetails(lat, long, details) {
             console.log(response)
             array = []
             for (let i = 0; i < 5; i++) {
-
-                array.push(response.data[i].location_id)
-
+                setTimeout(function () {
+                    array.push(response.data[i].location_id)
+                }, 100)
 
             }
 
@@ -39,12 +39,13 @@ function getPics(array) {
     document.getElementById("holder").innerHTML = ""
 
     for (let i = 0; i < 5; i++) {
-        const options = {method: 'GET', headers: {accept: 'application/json'}};
+        setTimeout(function () {
+            const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-        fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${array[i]}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
-            .then(response => response.json())
-            .then(response => {
-                console.log(response)
+            fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${array[i]}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
 
                     html = ""
 
@@ -57,8 +58,10 @@ function getPics(array) {
                     document.getElementById("holder").innerHTML += html
 
 
-            })
-            .catch(err => console.error(err));
+                })
+                .catch(err => console.error(err));
+
+        }, 100 )
 
     }
 
