@@ -4,11 +4,29 @@
 	<!--UPDATE THE TITLE-->
 	<title>UPDATE ME!</title>
 	<div th:insert="~{partials :: header}"></div>
+	<link rel="stylesheet" th:href="@{/JS/4xx-errorpage.css}">
 </head>
 <body>
 	<nav th:insert="~{partials :: navbar}"></nav>
-	<h1>404 Error</h1>
-	
+	<div class="center-div">
+	<h1 class="h1-page-not-found">Page could not be found</h1>
+	<div class="airplane">
+		<div class="airplaneAnimation">
+			<div class="plane">
+				<div class="main"></div>
+				<div class="wingOne"></div>
+				<div class="wingTwo"></div>
+				<div class="pollution"></div>
+			</div>
+			<div class="clouds">
+				<div class="cloudOne"></div>
+				<div class="cloudTwo"></div>
+				<div class="cloudThree"></div>
+			</div>
+		</div>
+	</div>
+	<h1 class="h1-page-not-found">Page is still on vacation</h1>
+	</div>
 	<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
