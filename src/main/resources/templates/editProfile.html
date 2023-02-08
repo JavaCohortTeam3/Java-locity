@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <div th:insert="~{partials :: header}"></div>
+</head>
+<body>
+<nav th:insert="~{partials :: navbar}"></nav>
+<h1>Edit Profile</h1>
+<form th:action="@{/profile/edit}" th:method="post" th:object="${user}">
+    <input type="hidden" id="id" th:field="*{id}">
+    <div class="form-group">
+        <div th:if="${usernameAlreadyInUse}">This username is already in use, please enter another username.</div>
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" th:field="*{username}"/>
+    </div>
+    <div class="form-group">
+        <div th:if="${emailAlreadyInUse}">This email is already in use, please enter another email</div>
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" th:field="*{email}"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" th:field="*{password}"/>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+</form>
+
+
+
+<footer th:replace="~{partials :: footer}"></footer>
+</body>
+</html>
