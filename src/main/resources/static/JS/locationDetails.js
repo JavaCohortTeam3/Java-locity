@@ -3,7 +3,7 @@ let array = []
 function getDetails(lat, long, details) {
     const options = {method: 'GET', headers: {accept: 'application/json'}};
     console.log(details);
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${lat}%2C${long}&key=36086683E4694CAFBB45F4197D8AE5D4&category=${details}&radius=25&radiusUnit=mi&language=en`, options)
+    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=${lat}%2C${long}&key=36086683E4694CAFBB45F4197D8AE5D4&category=${details}&radius=25&radiusUnit=mi&language=en`, options)
         .then(response => response.json())
         .then(response => {
             console.log(response)
@@ -42,7 +42,7 @@ function getPics(array) {
         setTimeout(function () {
             const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-            fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${array[i]}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
+            fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${array[i]}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
                 .then(response => response.json())
                 .then(response => {
                     console.log(response)

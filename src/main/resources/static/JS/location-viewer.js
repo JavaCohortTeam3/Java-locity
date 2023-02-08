@@ -3,7 +3,7 @@ function locationViewer() {
     let hidden = document.getElementById("hidden").value
     const options = {method: 'GET', headers: {accept: 'application/json'}};
     console.log(hidden);
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/photos?key=36086683E4694CAFBB45F4197D8AE5D4&language=en`, options)
+    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/photos?key=36086683E4694CAFBB45F4197D8AE5D4&language=en`, options)
         .then(response => response.json())
         .then(response => {
 
@@ -26,7 +26,7 @@ function addTitle() {
 
     const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
+    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
         .then(response => response.json())
         .then(response => {
 
