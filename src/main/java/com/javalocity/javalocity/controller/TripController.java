@@ -39,6 +39,7 @@ public class TripController {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Trip trip = new Trip(start, end, title, location, user);
+        System.out.println(trip);
         tripDao.save(trip);
         session.setAttribute("location", location);
         session.setAttribute("trip", trip);
