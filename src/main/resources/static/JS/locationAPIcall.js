@@ -22,50 +22,15 @@ function geocode(search, token) {
 }
 
 
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        lat = position.coords.latitude;
-        lng = position.coords.longitude;
-        mapboxgl.accessToken = token;
-
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v12',
-            zoom: 10,
-            center: [lng, lat]
-
-        });
-
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
-            })
-        );
-        map.addControl(
-            new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-// When active the map will receive updates to the device's location as it changes.
-                trackUserLocation: true,
-// Draw an arrow next to the location dot to indicate which direction the device is heading.
-                showUserHeading: true
-            })
-        );
 
 
-
-
-    });
-} else {
     mapboxgl.accessToken = token;
 
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v12',
         zoom: 10,
-        center: [-20, 100]
+        center: [-20, 80]
 
     });
 
@@ -90,8 +55,7 @@ if (navigator.geolocation) {
 
 
 
-    console.log("Geolocation is not supported by this browser.");
-}
+
 
 
 
