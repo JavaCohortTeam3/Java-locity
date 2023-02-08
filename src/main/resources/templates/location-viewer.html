@@ -8,9 +8,27 @@
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 
-
+<form th:action="@{/location/viewer}" th:method="post">
 <input type="hidden" name="hidden" th:value="${id}" id="hidden">
+<input type="hidden" name="name" id="name">
+<input type="hidden" name="web_url" id="web_url">
+<input type="hidden" name="address_string" id="address_string">
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
+<input type="hidden" name="email" id="email">
+<input type="hidden" name="phone" id="phone">
+<input type="hidden" name="rating" id="rating">
+
+
+
+
 <div id="title"></div>
+Start Time:
+<h6 th:text="${start}"></h6>
+End Time:
+<h6 th:text="${end}"></h6>
+<button>Save Trip</button>
+</form>
 <div id="display"></div>
 <footer th:replace="~{partials :: footer}"></footer>
 </body>

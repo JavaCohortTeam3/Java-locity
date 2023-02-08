@@ -35,6 +35,16 @@ function addTitle() {
             html += `<h6>Rating: ${response.rating}</h6>`
             html += `<h6>Website: <a href="${response.website}">${response.website}</a></h6>`
             title.innerHTML = html
+            document.getElementById("name").value = response.name
+            document.getElementById("web_url").value = response.web_url
+            document.getElementById("address_string").value = response.address_obj.address_string
+            document.getElementById("latitude").value = response.latitude
+            document.getElementById("longitude").value = response.longitude
+            document.getElementById("email").value = response.email
+            document.getElementById("phone").value = response.phone
+            document.getElementById("rating").value = response.rating
+
+
 
         })
         .catch(err => console.error(err));

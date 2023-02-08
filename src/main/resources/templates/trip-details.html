@@ -14,9 +14,10 @@ Choose Your Trip Details:
     <option value="hotels">Hotels</option>
     <option value="attractions">Attractions</option>
 </select>
-Start Time: <input type="time" name="time" value="10:00" />
-End Time: <input type="time" name="time" value="15:00" />
+
 <form th:action="@{/trip/details}" th:method="post">
+    Start Time: <input type="time" name="start" value="10:00" />
+    End Time: <input type="time" name="end" value="15:00" />
 <div id="holder"></div>
 </form>
 
