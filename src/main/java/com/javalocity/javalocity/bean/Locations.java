@@ -13,7 +13,7 @@ public class Locations {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 254)
     private String web_url;
 
     @Column(nullable = false, length = 100)
@@ -35,15 +35,13 @@ public class Locations {
     private String phone;
 
     @Column
-    private int rating;
+    private double rating;
 
-    @Column(nullable = false, length = 100)
-    private String cuisine;
 
     public Locations() {
     }
 
-    public Locations(String name, String web_url, String address_string, double latitude, double longitude, int location_idd, String email, String phone, int rating, String cuisine) {
+    public Locations(String name, String web_url, String address_string, double latitude, double longitude, int location_idd, String email, String phone, double rating) {
         this.name = name;
         this.web_url = web_url;
         this.address_string = address_string;
@@ -53,7 +51,7 @@ public class Locations {
         this.email = email;
         this.phone = phone;
         this.rating = rating;
-        this.cuisine = cuisine;
+
     }
 
     public long getId() {
@@ -128,19 +126,13 @@ public class Locations {
         this.phone = phone;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
-    public String getCuisine() {
-        return cuisine;
-    }
 
-    public void setCuisine(String cuisine) {
-        this.cuisine = cuisine;
-    }
 }

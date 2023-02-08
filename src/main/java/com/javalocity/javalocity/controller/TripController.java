@@ -1,7 +1,9 @@
 package com.javalocity.javalocity.controller;
 
+import com.javalocity.javalocity.bean.Locations;
 import com.javalocity.javalocity.bean.Trip;
 import com.javalocity.javalocity.bean.User;
+import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +18,11 @@ public class TripController {
 
     private final TripRepository tripDao;
 
-    public TripController(TripRepository tripDao) {
+    private final LocationsRepository locationsDao;
+
+    public TripController(TripRepository tripDao, LocationsRepository locationsDao) {
         this.tripDao = tripDao;
+        this.locationsDao = locationsDao;
     }
 
     @GetMapping("/trip/locations")
@@ -42,15 +47,26 @@ public class TripController {
         return "/trip-details";
     }
     @PostMapping("/trip/details")
-    public String setDetails(@RequestParam("idd") int id, HttpSession session) {
-        System.out.println(id);
+    public String setDetails(@RequestParam("idd") int id, HttpSession session, @RequestParam("start") String start, @RequestParam("end") String end) {
+
         session.setAttribute("id", id);
+        session.setAttribute("start", start);
+        session.setAttribute("end", end);
         return "redirect:/location/viewer";
     }
 
     @GetMapping("/location/viewer")
     public String view(HttpSession session, Model model) {
         model.addAttribute("id", session.getAttribute("id"));
+        model.addAttribute("start", session.getAttribute("start"));
+        model.addAttribute("end", session.getAttribute("end"));
         return "/location-viewer";
+    }
+
+    @PostMapping("/location/viewer")
+    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") String web_url, @RequestParam("address_string") String address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("rating") double rating) {
+        Locations location = new Locations(name, web_url, address_string, latitude, longitude, (int) session.getAttribute("id"), email, phone, rating);
+        locationsDao.save(location);
+        return "redirect:/profile";
     }
 }
