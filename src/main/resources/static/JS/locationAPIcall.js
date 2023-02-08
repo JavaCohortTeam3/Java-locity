@@ -2,8 +2,10 @@
 
 let token = "pk.eyJ1IjoibWF0dGhld3dpcmFtIiwiYSI6ImNsOWx2YmJwODFtMnEzdXAyMDFvdHRxcHcifQ.20mYzJo1wfnNRyCTEJMtyw"
 
+let lat;
+let lng;
 
-
+let input;
 
 function geocode(search, token) {
     var baseUrl = 'https://api.mapbox.com';
@@ -19,45 +21,87 @@ function geocode(search, token) {
         });
 }
 
-mapboxgl.accessToken = token;
 
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v12',
-    zoom: 5,
-    center: [-80.175652, 33.018505]
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        mapboxgl.accessToken = token;
 
-});
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            zoom: 10,
+            center: [lng, lat]
 
-map.addControl(
-    new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-    })
-);
-map.addControl(
-    new mapboxgl.GeolocateControl({
-        positionOptions: {
-            enableHighAccuracy: true
-        },
+        });
+
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+        map.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
 // When active the map will receive updates to the device's location as it changes.
-        trackUserLocation: true,
+                trackUserLocation: true,
 // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true
-    })
-);
-
-
-let input = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")
+                showUserHeading: true
+            })
+        );
 
 
 
 
-    console.log(input[0].value)
+    });
+} else {
+    mapboxgl.accessToken = token;
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        zoom: 10,
+        center: [-20, 100]
+
+    });
+
+    map.addControl(
+        new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl
+        })
+    );
+    map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+// When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+// Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+        })
+    );
+
+
+
+
+    console.log("Geolocation is not supported by this browser.");
+}
+
+
+
+
+
 let submit = document.getElementById("submission")
 submit.addEventListener("click", function (e) {
 
     e.preventDefault()
+    let input = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input")
     let data = geocode(input[0].value, token);
     data.then(res => {
         document.getElementById("location").value = res[0].center[1] + "," +res[0].center[0]

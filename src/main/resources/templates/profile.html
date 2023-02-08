@@ -29,8 +29,19 @@
         <div class="col-md-8">
             <h5 class="text-secondary mb-3">Previous Planed Trips:</h5>
             <div class="card-columns">
-                <div class="card" th:each="search : ${previousTrips}">
+                <div class="card" th:each="search : ${trip}">
                     <div class="card-body">
+                        Id:
+                        <p th:text="${search.getId()}"></p>
+                        Start Date:
+                        <p th:text="${search.getStartDate()}"></p>
+                        End Date:
+                        <p th:text="${search.getEndDate()}"></p>
+                        Locale:
+                        <p th:text="${search.getName()}"></p>
+                        <form th:action="@{/profile}" th:method="post">
+                            <button type="submit" name="id" >Find Trip</button>
+                        </form>
 
                     </div>
                 </div>
