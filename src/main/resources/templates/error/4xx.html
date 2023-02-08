@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<!--UPDATE THE TITLE-->
-	<title>UPDATE ME!</title>
+	<title>Page not found</title>
 	<div th:insert="~{partials :: header}"></div>
-	<link rel="stylesheet" th:href="@{/JS/4xx-errorpage.css}">
+	<div th:replace="~{partials :: css}"></div>
+	<link rel="stylesheet" th:href="@{/css/4xx-errorpage.css}">
 </head>
 <body>
 	<nav th:insert="~{partials :: navbar}"></nav>
