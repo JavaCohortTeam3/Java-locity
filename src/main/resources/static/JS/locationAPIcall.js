@@ -61,6 +61,7 @@ submit.addEventListener("click", function (e) {
     let data = geocode(input[0].value, token);
     data.then(res => {
         document.getElementById("location").value = res[0].center[1] + "," +res[0].center[0]
+        document.getElementById("title").value = input[0].value
         console.log(document.getElementById("location").value);
         document.getElementsByTagName("form")[1].submit()
     })

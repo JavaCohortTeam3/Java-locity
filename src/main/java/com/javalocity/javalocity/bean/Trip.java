@@ -15,10 +15,10 @@ public class Trip {
     private long id;
 
     @Column(length = 50)
-    private Date startDate;
+    private String startDate;
 
     @Column(length = 50)
-    private Date endDate;
+    private String endDate;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -31,7 +31,15 @@ public class Trip {
 
     public Trip() {}
 
-    public Trip(long id, Date startDate, Date endDate, String name, String description, User user) {
+    public Trip(String startDate, String endDate, String name, String description, User user) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.name = name;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Trip(long id, String startDate, String endDate, String name, String description, User user) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -48,19 +56,19 @@ public class Trip {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
