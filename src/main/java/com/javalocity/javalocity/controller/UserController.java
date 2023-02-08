@@ -103,7 +103,7 @@ public class UserController {
             userDao.save(user);
             return "redirect:/login?logout";
         } else {
-            return "editProfile";
+            return "/editProfile";
         }
     }
 }

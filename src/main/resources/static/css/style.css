@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+body {
+    background-color: lightsalmon;
+}
+
+img {
+    height: 350px;
+    width: 350px;
+}
