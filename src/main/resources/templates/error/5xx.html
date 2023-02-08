@@ -2,12 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<!--UPDATE THE TITLE-->
-	<title>UPDATE ME!</title>
-	<div th:insert="~{partials :: header}"></div>
+	<title>ERROR!</title>
+	<div th:insert="~{partials :: header}" style="display: none"></div>
+	<link rel="stylesheet" th:href="@{/JS/location-viewer.css}">
 </head>
 <body>
 	<nav th:insert="~{partials :: navbar}"></nav>
-	<h1>INTERNAL SERVER ERROR!</h1>
+	<div id="error">
+		<div id="box"></div>
+		<h3>ERROR 500</h3>
+		<p>Things are a little <span>unstable</span> here</p>
+		<p>Resolving issue, return later</p>
+	</div>
 	
 	<footer th:replace="~{partials :: footer}"></footer>
 </body>
