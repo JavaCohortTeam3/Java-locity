@@ -7,12 +7,15 @@
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <input type="hidden" th:value="${location}" id="hidden">
+Choose Your Trip Details:
 <select name="details" id="details">
     <option value=""></option>
     <option value="restaurants">Restaurants</option>
     <option value="hotels">Hotels</option>
     <option value="attractions">Attractions</option>
 </select>
+Start Time: <input type="time" name="time" value="10:00" />
+End Time: <input type="time" name="time" value="15:00" />
 <form th:action="@{/trip/details}" th:method="post">
 <div id="holder"></div>
 </form>

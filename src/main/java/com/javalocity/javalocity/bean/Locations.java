@@ -9,53 +9,51 @@ public class Locations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String location_id;
+
     @Column(nullable = false, length = 100)
     private String name;
 
     @Column(nullable = false, length = 100)
-    private double distance;
-
-    @Column(nullable = false, length = 100)
-    private String bearing;
-
-    @Column(nullable = false, length = 100)
-    private String street1;
-
-    @Column(nullable = false)
-    private String street2;
-
-    @Column(nullable = false)
-    private String city;
-
-    @Column(nullable = false, length = 100)
-    private String state;
-
-    @Column(nullable = false, length = 100)
-    private String country;
-
-    @Column(nullable = false, length = 100)
-    private String postalcode;
+    private String web_url;
 
     @Column(nullable = false, length = 100)
     private String address_string;
 
-    public Locations(String location_id, String name, double distance, String bearing, String street1, String street2, String city, String state, String country, String postalcode, String address_string) {
-        this.location_id = location_id;
-        this.name = name;
-        this.distance = distance;
-        this.bearing = bearing;
-        this.street1 = street1;
-        this.street2 = street2;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.postalcode = postalcode;
-        this.address_string = address_string;
-    }
+    @Column
+    private double latitude;
+
+    @Column
+    private double longitude;
+
+    @Column
+    private int location_idd;
+
+    @Column(nullable = false, length = 100)
+    private String email;
+
+    @Column(nullable = false, length = 100)
+    private String phone;
+
+    @Column
+    private int rating;
+
+    @Column(nullable = false, length = 100)
+    private String cuisine;
 
     public Locations() {
+    }
+
+    public Locations(String name, String web_url, String address_string, double latitude, double longitude, int location_idd, String email, String phone, int rating, String cuisine) {
+        this.name = name;
+        this.web_url = web_url;
+        this.address_string = address_string;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location_idd = location_idd;
+        this.email = email;
+        this.phone = phone;
+        this.rating = rating;
+        this.cuisine = cuisine;
     }
 
     public long getId() {
@@ -66,14 +64,6 @@ public class Locations {
         this.id = id;
     }
 
-    public String getLocation_id() {
-        return location_id;
-    }
-
-    public void setLocation_id(String location_id) {
-        this.location_id = location_id;
-    }
-
     public String getName() {
         return name;
     }
@@ -82,68 +72,12 @@ public class Locations {
         this.name = name;
     }
 
-    public double getDistance() {
-        return distance;
+    public String getWeb_url() {
+        return web_url;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public String getBearing() {
-        return bearing;
-    }
-
-    public void setBearing(String bearing) {
-        this.bearing = bearing;
-    }
-
-    public String getStreet1() {
-        return street1;
-    }
-
-    public void setStreet1(String street1) {
-        this.street1 = street1;
-    }
-
-    public String getStreet2() {
-        return street2;
-    }
-
-    public void setStreet2(String street2) {
-        this.street2 = street2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getPostalcode() {
-        return postalcode;
-    }
-
-    public void setPostalcode(String postalcode) {
-        this.postalcode = postalcode;
+    public void setWeb_url(String web_url) {
+        this.web_url = web_url;
     }
 
     public String getAddress_string() {
@@ -152,5 +86,61 @@ public class Locations {
 
     public void setAddress_string(String address_string) {
         this.address_string = address_string;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getLocation_idd() {
+        return location_idd;
+    }
+
+    public void setLocation_idd(int location_idd) {
+        this.location_idd = location_idd;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 }

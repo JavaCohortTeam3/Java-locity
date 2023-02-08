@@ -25,7 +25,7 @@ let hidden  = document.getElementById("hidden").value
 document.getElementById("details").addEventListener("change", function () {
     let details = document.getElementById("details").value
     if (details === "") {
-
+        document.getElementById("holder").innerHTML = ""
     } else {
 
 
