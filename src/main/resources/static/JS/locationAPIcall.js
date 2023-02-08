@@ -24,7 +24,7 @@ mapboxgl.accessToken = token;
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v12',
-    zoom: 19,
+    zoom: 5,
     center: [-80.175652, 33.018505]
 
 });
@@ -33,6 +33,17 @@ map.addControl(
     new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
+    })
+);
+map.addControl(
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+// When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+// Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
     })
 );
 
