@@ -106,6 +106,13 @@ public class User {
         this.profile_img = profile_img;
     }
 
+    @Transient
+    public String getPhotosImagePath() {
+        if (profile_img == null || id == null) return null;
+
+        return "/user-photos/" + id + "/" + profile_img;
+    }
+
 //    public User(Long id, String username, String email, String password, List<Post> posts) {
 //        this.id = id;
 //        this.username = username;

@@ -8,17 +8,22 @@ import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
 import com.javalocity.javalocity.repository.UserRepository;
+import com.javalocity.javalocity.util.FileUploadUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,14 +58,14 @@ public class UserController {
     @PostMapping("/register")
     public String submitRegistrationForm(@ModelAttribute User user, Model model) {
         boolean validRegister = true;
-        if (userDao.findByUsername(user.getUsername()) != null){
+        if (userDao.findByUsername(user.getUsername()) != null) {
             validRegister = false;
             model.addAttribute("usernameAlreadyInUse", true);
-        } else if (userDao.findByEmail(user.getEmail()) != null){
+        } else if (userDao.findByEmail(user.getEmail()) != null) {
             validRegister = false;
             model.addAttribute("emailAlreadyInUse", true);
         }
-        if (validRegister){
+        if (validRegister) {
             System.out.println(user);
             String pw = passwordEncoder.encode(user.getPassword());
             user.setPassword(pw);
@@ -81,6 +86,7 @@ public class UserController {
     public String logoutPage(@ModelAttribute User user) {
         return "/logout";
     }
+
     @GetMapping("/profile")
     public String profilePage(@ModelAttribute User user, Model model, HttpSession session) {
 
@@ -107,7 +113,7 @@ public class UserController {
         trip_locations = (List<Trip_Location>) session.getAttribute("trip");
         List<Locations> locations = new ArrayList<>();
         for (int i = 0; i < trip_locations.size(); i++) {
-           locations.add(locationsDao.getReferenceById(trip_locations.get(i).getLocations().getId()));
+            locations.add(locationsDao.getReferenceById(trip_locations.get(i).getLocations().getId()));
         }
         model.addAttribute("locations", locations);
         return "view";
@@ -116,9 +122,14 @@ public class UserController {
     @GetMapping("/account/info")
     public String accountInfoGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user1 = userDao.getOne(user.getId());
+        String pic = "/images/" + user1.getId() +"/"+ user1.getProfile_img();
+        System.out.println("pic = " + pic);
+        model.addAttribute("pic", pic);
         model.addAttribute("user", user);
         return "accountInfo";
     }
+
     @GetMapping("/account/edit")
     public String editAccountGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -136,18 +147,18 @@ public class UserController {
         if (!user.getUsername().equals(oldUser.getUsername()) && userDao.findByUsername(user.getUsername()) != null) {
             validEdit = false;
             model.addAttribute("usernameAlreadyInUse", true);
-        } else if (!user.getEmail().equals(oldUser.getEmail()) && userDao.findByEmail(user.getEmail()) != null){
+        } else if (!user.getEmail().equals(oldUser.getEmail()) && userDao.findByEmail(user.getEmail()) != null) {
             validEdit = false;
             model.addAttribute("emailAlreadyInUse", true);
         }
-        if (validEdit){
-            if (user.getUsername().isEmpty()){
+        if (validEdit) {
+            if (user.getUsername().isEmpty()) {
                 user.setUsername(oldUsername);
             }
-            if (user.getEmail().isEmpty()){
+            if (user.getEmail().isEmpty()) {
                 user.setEmail(oldEmail);
             }
-            if (user.getPassword().isEmpty()){
+            if (user.getPassword().isEmpty()) {
                 user.setPassword(oldPassword);
             } else {
                 String pw = passwordEncoder.encode(user.getPassword());
@@ -158,5 +169,24 @@ public class UserController {
         } else {
             return "accountEdit";
         }
+    }
+@GetMapping("/profile/profilePic")
+    public String profilePicGet(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user1 = (User)userDao.getReferenceById(user.getId());
+        model.addAttribute("user", user1);
+        return "profilePic";
+    }
+    @PostMapping("/profile/profilePic")
+    public RedirectView saveUser(@RequestParam("image") MultipartFile multipartFile) throws IOException {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        User user1 = (User)userDao.getReferenceById(user.getId());
+        user1.setProfile_img(fileName);
+        userDao.save(user1);
+        String uploadDir = "src/main/resources/static/images/" + user1.getId();
+//        String uploadDir = "user-photos/" + user1.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        return new RedirectView("/account/info", true);
     }
 }
