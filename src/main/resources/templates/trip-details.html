@@ -20,8 +20,11 @@ Choose Your Trip Details:
 </select>
 
 <form th:action="@{/trip/details}" th:method="post">
-    Start Time: <input type="time" name="start" value="10:00" />
-    End Time: <input type="time" name="end" value="15:00" />
+    Date:  <input type="date" name="begin"
+                        placeholder="dd-mm-yyyy" value=""
+                        th:min="${start}" th:max="${end}" required>
+    Start Time: <input type="time" name="start" value="" required />
+    End Time: <input type="time" name="end" value="" required/>
 <div id="holder"></div>
 </form>
 

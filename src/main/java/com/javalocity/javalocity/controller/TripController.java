@@ -7,6 +7,7 @@ import com.javalocity.javalocity.bean.User;
 import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
+import com.javalocity.javalocity.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 public class TripController {
+    private final UserRepository userDao;
 
     private final TripRepository tripDao;
 
@@ -28,7 +28,8 @@ public class TripController {
 
     private final Trip_locationRepository trip_locationDao;
 
-    public TripController(TripRepository tripDao, LocationsRepository locationsDao, Trip_locationRepository trip_locationDao) {
+    public TripController(UserRepository userDao, TripRepository tripDao, LocationsRepository locationsDao, Trip_locationRepository trip_locationDao) {
+        this.userDao = userDao;
         this.tripDao = tripDao;
         this.locationsDao = locationsDao;
         this.trip_locationDao = trip_locationDao;
@@ -50,6 +51,7 @@ public class TripController {
         trip.setUser(user);
         if (tripDao.findByStartDate(trip.getStartDate()) == null || tripDao.findByEndDate(trip.getEndDate()) == null) {
             tripDao.save(trip);
+
         }
         session.setAttribute("location", location);
         session.setAttribute("trip", trip);
@@ -60,13 +62,18 @@ public class TripController {
     public String getDetails(Model model, HttpSession session) {
 
         model.addAttribute("location", session.getAttribute("location"));
+        Trip trip = (Trip) session.getAttribute("trip");
 
+        model.addAttribute("start", trip.getStartDate());
+        model.addAttribute("end", trip.getEndDate());
 
         return "/trip-details";
     }
     @PostMapping("/trip/details")
-    public String setDetails(@RequestParam("idd") int id, HttpSession session, @RequestParam("start") String start, @RequestParam("end") String end) {
+    public String setDetails(@RequestParam("idd") int id, HttpSession session, @RequestParam("start") String start, @RequestParam("end") String end, @RequestParam("begin") String begin) {
 
+
+        session.setAttribute("begin", begin);
         session.setAttribute("id", id);
         session.setAttribute("start", start);
         session.setAttribute("end", end);
@@ -82,9 +89,9 @@ public class TripController {
     }
 
     @PostMapping("/location/viewer")
-    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") Optional<String> web_url, @RequestParam("address_string") Optional<String> address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") Optional<String> phone, @RequestParam("rating") Optional<Double> rating) {
+    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") Optional<String> web_url, @RequestParam("address_string") Optional<String> address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") Optional<String> phone, @RequestParam("rating")Optional<Double> rating, @RequestParam("picture") Optional<String> picture) {
         Locations location = new Locations();
-        if (phone.isEmpty() || web_url.isEmpty() || rating.isEmpty()) {
+        if (phone.isEmpty() || web_url.isEmpty() || rating.isEmpty() || picture.isEmpty()) {
             location.setName(name);
 
             location.setAddress_string(address_string.get());
@@ -105,7 +112,8 @@ public class TripController {
             location.setLocation_idd((int) session.getAttribute("id"));
             location.setEmail(email);
             location.setPhone(phone.get());
-            location.setRating(rating.get());
+            location.setRating((double) rating.get());
+            location.setPicture(picture.get());
             locationsDao.save(location);
         }
 
@@ -114,11 +122,13 @@ public class TripController {
 
         String start = (String) session.getAttribute("start");
         String end = (String) session.getAttribute("end");
+        String begin = (String) session.getAttribute("begin");
 
-        Trip_Location trip_location = new Trip_Location(trip, location, trip.getStartDate(), trip.getEndDate(), start, end);
+        Trip_Location trip_location = new Trip_Location(trip, location, begin, trip.getEndDate(), start, end);
         trip_location.setLocations(location);
 
         trip_locationDao.save(trip_location);
+
         Locations locations = locationsDao.getLocationByName(name);
         locations.setTrip_location(trip_location);
         locationsDao.save(locations);

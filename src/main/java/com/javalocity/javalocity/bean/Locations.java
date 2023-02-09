@@ -24,6 +24,9 @@ public class Locations {
     private String address_string;
 
     @Column
+    private String picture;
+
+    @Column
     private double latitude;
 
     @Column
@@ -56,6 +59,14 @@ public class Locations {
         this.email = email;
         this.phone = phone;
         this.rating = rating;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public long getId() {

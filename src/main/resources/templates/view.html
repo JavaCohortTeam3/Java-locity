@@ -11,7 +11,8 @@
     <div class="card-columns">
         <div class="card" th:each="locations, i : ${locations}">
             <div class="card-body">
-
+                Date:
+                <p th:text="${trips[i.index].getStart_date}"></p>
                 Start Time:
                 <p th:text="${trips[i.index].getStart_time}"></p>
                 End Time:
@@ -26,6 +27,8 @@
                 <p th:text="${locations.getPhone()}"></p>
 
                 <a th:href="${locations.getWeb_url()}" >Website</a>
+
+                <img th:src="${locations.getPicture}" alt="">
 
 
             </div>

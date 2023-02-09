@@ -17,10 +17,10 @@
     <button id="submission">Submit</button>
     Trip Start:  <input type="date" name="begin"
                         placeholder="dd-mm-yyyy" value=""
-                        min="1997-01-01" max="2030-12-31">
+                        min="1997-01-01" max="2030-12-31" required>
     Trip End:   <input type="date" name="end"
                        placeholder="dd-mm-yyyy" value=""
-                       min="1997-01-01" max="2030-12-31">
+                       min="1997-01-01" max="2030-12-31" required>
 </form>
 <div id='map' style='width: 80vw; height: 80vh; margin: auto'></div>
 <footer th:replace="~{partials :: footer}"></footer>

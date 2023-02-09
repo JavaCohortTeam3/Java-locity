@@ -7,7 +7,7 @@ function locationViewer() {
         .then(response => response.json())
         .then(response => {
             console.log(response);
-
+            document.getElementById("picture").value = response.data[0].images.large.url
             for (let i = 0; i < response.data.length; i++) {
                 setTimeout(function () {
                     html = ""
