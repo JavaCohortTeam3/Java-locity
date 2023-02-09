@@ -17,10 +17,10 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 50, unique = true)
+    @Column(length = 50)
     private String startDate;
 
-    @Column(length = 50, unique = true)
+    @Column(length = 50)
     private String endDate;
 
     @Column(nullable = false, length = 100)

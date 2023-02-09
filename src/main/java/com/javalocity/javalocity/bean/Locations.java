@@ -17,7 +17,7 @@ public class Locations {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 254)
+    @Column( length = 254)
     private String web_url;
 
     @Column(nullable = false, length = 100)
@@ -32,10 +32,10 @@ public class Locations {
     @Column
     private int location_idd;
 
-    @Column(nullable = false, length = 100)
+    @Column( length = 100)
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column( length = 100)
     private String phone;
 
     @Column

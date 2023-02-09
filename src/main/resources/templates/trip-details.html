@@ -8,6 +8,9 @@
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <input type="hidden" th:value="${location}" id="hidden">
+<form th:action="@{/trip/view}">
+    <button type="submit">Finalize Trip</button>
+</form>
 Choose Your Trip Details:
 <select name="details" id="details">
     <option value=""></option>

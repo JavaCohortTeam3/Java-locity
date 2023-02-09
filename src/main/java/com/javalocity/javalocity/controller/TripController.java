@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -81,18 +82,33 @@ public class TripController {
     }
 
     @PostMapping("/location/viewer")
-    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") String web_url, @RequestParam("address_string") String address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("rating") double rating) {
+    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") Optional<String> web_url, @RequestParam("address_string") Optional<String> address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") Optional<String> phone, @RequestParam("rating") Optional<Double> rating) {
         Locations location = new Locations();
-        location.setName(name);
-        location.setWeb_url(web_url);
-        location.setAddress_string(address_string);
-        location.setLatitude(latitude);
-        location.setLongitude(longitude);
-        location.setLocation_idd((int) session.getAttribute("id"));
-        location.setEmail(email);
-        location.setPhone(phone);
-        location.setRating(rating);
-        locationsDao.save(location);
+        if (phone.isEmpty() || web_url.isEmpty() || rating.isEmpty()) {
+            location.setName(name);
+
+            location.setAddress_string(address_string.get());
+            location.setLatitude(latitude);
+            location.setLongitude(longitude);
+            location.setLocation_idd((int) session.getAttribute("id"));
+            location.setEmail(email);
+
+
+            locationsDao.save(location);
+        } else {
+
+            location.setName(name);
+            location.setWeb_url(web_url.get());
+            location.setAddress_string(address_string.get());
+            location.setLatitude(latitude);
+            location.setLongitude(longitude);
+            location.setLocation_idd((int) session.getAttribute("id"));
+            location.setEmail(email);
+            location.setPhone(phone.get());
+            location.setRating(rating.get());
+            locationsDao.save(location);
+        }
+
 
         Trip trip = (Trip) session.getAttribute("trip");
 
@@ -110,5 +126,10 @@ public class TripController {
 
 
         return "redirect:/trip/details";
+    }
+
+    @GetMapping("/trip/view")
+    public String viewTrip() {
+        return "redirect:/profile";
     }
 }
