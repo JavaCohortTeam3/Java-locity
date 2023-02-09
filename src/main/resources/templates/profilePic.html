@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Picture YAY!</title>
+    <div th:insert="~{partials :: header}"></div>
+</head>
+<body>
+<nav th:insert="~{partials :: navbar}"></nav>
+<div class="container-fluid">
+<form th:action="@{/profile/profilePic}"
+      th:object="${user}" method="post"
+      enctype="multipart/form-data">
+
+    <h1>Upload a profile picture!</h1>
+    <div>
+        <label>Photos:</label>
+        <input type="file" name="image" accept="image/png, image/jpeg" />
+        <input class="btn btn-primary" type="submit" value="Upload File"/>
+    </div>
+
+</form>
+</div>
+
+<footer th:replace="~{partials :: footer}"></footer>
+</body>
+</html>
