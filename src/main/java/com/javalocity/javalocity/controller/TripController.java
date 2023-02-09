@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Controller
 public class TripController {
 
@@ -38,12 +41,19 @@ public class TripController {
     public String getLocale(@RequestParam("location") String location, Model model, HttpSession session, @RequestParam("begin") String start, @RequestParam("end") String end, @RequestParam("title") String title) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Trip trip = new Trip(start, end, title, location, user);
-        System.out.println(trip);
-        tripDao.save(trip);
+        Trip trip = new Trip();
+        trip.setStartDate(start);
+        trip.setEndDate(end);
+        trip.setName(title);
+        trip.setDescription(location);
+        trip.setUser(user);
+        if (tripDao.findByStartDate(trip.getStartDate()) == null || tripDao.findByEndDate(trip.getEndDate()) == null) {
+            tripDao.save(trip);
+        }
         session.setAttribute("location", location);
         session.setAttribute("trip", trip);
         return "redirect:/trip/details";
+
     }
     @GetMapping("/trip/details")
     public String getDetails(Model model, HttpSession session) {
@@ -72,14 +82,33 @@ public class TripController {
 
     @PostMapping("/location/viewer")
     public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") String web_url, @RequestParam("address_string") String address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("rating") double rating) {
-        Locations location = new Locations(name, web_url, address_string, latitude, longitude, (int) session.getAttribute("id"), email, phone, rating);
+        Locations location = new Locations();
+        location.setName(name);
+        location.setWeb_url(web_url);
+        location.setAddress_string(address_string);
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        location.setLocation_idd((int) session.getAttribute("id"));
+        location.setEmail(email);
+        location.setPhone(phone);
+        location.setRating(rating);
         locationsDao.save(location);
+
         Trip trip = (Trip) session.getAttribute("trip");
+
         String start = (String) session.getAttribute("start");
         String end = (String) session.getAttribute("end");
-        Trip_Location trip_location = new Trip_Location(trip, location, trip.getStartDate(), trip.getEndDate(), start, end);
-        trip_locationDao.save(trip_location);
 
-        return "redirect:/profile";
+        Trip_Location trip_location = new Trip_Location(trip, location, trip.getStartDate(), trip.getEndDate(), start, end);
+        trip_location.setLocations(location);
+
+        trip_locationDao.save(trip_location);
+        Locations locations = locationsDao.getLocationByName(name);
+        locations.setTrip_location(trip_location);
+        locationsDao.save(locations);
+
+
+
+        return "redirect:/trip/details";
     }
 }

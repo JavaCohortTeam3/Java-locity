@@ -1,5 +1,6 @@
 package com.javalocity.javalocity.controller;
 
+import com.javalocity.javalocity.bean.Locations;
 import com.javalocity.javalocity.bean.Trip;
 import com.javalocity.javalocity.bean.Trip_Location;
 import com.javalocity.javalocity.bean.User;
@@ -7,6 +8,7 @@ import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
 import com.javalocity.javalocity.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,28 +82,36 @@ public class UserController {
         return "/logout";
     }
     @GetMapping("/profile")
-    public String profilePage(@ModelAttribute User user, Model model) {
+    public String profilePage(@ModelAttribute User user, Model model, HttpSession session) {
 
         User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Trip> trip = tripDao.findByUser(user1);
-        List<Trip_Location> trip_locations = new ArrayList<>();
-        for (int i = 0; i < trip.size(); i++) {
 
-
-            trip_locations.add(trip_locationDao.findByTrip(trip.get(i)));
-        }
-        System.out.println(trip_locations.size());
         model.addAttribute("trip", trip);
-        model.addAttribute("trip_locales", trip_locations);
+
         return "profile";
     }
 
-//    @PostMapping("/profile")
-//    public String postProfile(Model model) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Trip> trip = tripDao.findByUser(user);
-//        model.addAttribute("trip", trip);
-//    }
+    @PostMapping("/profile")
+    public String postProfile(Model model, @RequestParam("id") long id, HttpSession session) {
+        Trip trip = tripDao.getReferenceById(id);
+        List<Trip_Location> trip_locations = trip_locationDao.findTrip_LocationByTrip(trip);
+        session.setAttribute("trip", trip_locations);
+        return "redirect:/view";
+    }
+
+    @GetMapping("/view")
+    public String viewTrips(HttpSession session, Model model) {
+        model.addAttribute("trips", session.getAttribute("trip"));
+        List<Trip_Location> trip_locations;
+        trip_locations = (List<Trip_Location>) session.getAttribute("trip");
+        List<Locations> locations = new ArrayList<>();
+        for (int i = 0; i < trip_locations.size(); i++) {
+           locations.add(locationsDao.getReferenceById(trip_locations.get(i).getLocations().getId()));
+        }
+        model.addAttribute("locations", locations);
+        return "view";
+    }
 
     @GetMapping("/account/info")
     public String accountInfoGet(Model model) {

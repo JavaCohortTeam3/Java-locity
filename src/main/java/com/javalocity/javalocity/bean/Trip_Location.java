@@ -2,6 +2,8 @@ package com.javalocity.javalocity.bean;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "trip_locations")
 public class Trip_Location {
@@ -9,7 +11,8 @@ public class Trip_Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @OneToOne
@@ -18,13 +21,24 @@ public class Trip_Location {
     @Column
     private String start_date;
 
-    @Column String end_date;
+    @Column
+    String end_date;
 
     @Column String start_time;
 
     @Column String end_time;
 
     public Trip_Location() {
+    }
+
+    public Trip_Location(long id, Trip trip, Locations locations, String start_date, String end_date, String start_time, String end_time) {
+        this.id = id;
+        this.trip = trip;
+        this.locations = locations;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
     public Trip_Location(Trip trip, Locations locations, String start_date, String end_date, String start_time, String end_time) {
