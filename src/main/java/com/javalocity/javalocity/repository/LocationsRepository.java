@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface LocationsRepository extends JpaRepository<Locations, Long> {
-
+    Locations getLocationByName(String name);
     List<Locations> getLocationsByName(String name);
 }

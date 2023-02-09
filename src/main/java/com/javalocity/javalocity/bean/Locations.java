@@ -2,6 +2,8 @@ package com.javalocity.javalocity.bean;
 import jakarta.persistence.*;
 import org.w3c.dom.Text;
 
+
+
 @Entity
 @Table (name = "locations")
 public class Locations {
@@ -9,6 +11,8 @@ public class Locations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @OneToOne
+    private Trip_Location trip_location;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -41,7 +45,8 @@ public class Locations {
     public Locations() {
     }
 
-    public Locations(String name, String web_url, String address_string, double latitude, double longitude, int location_idd, String email, String phone, double rating) {
+    public Locations(Trip_Location trip_location, String name, String web_url, String address_string, double latitude, double longitude, int location_idd, String email, String phone, double rating) {
+        this.trip_location = trip_location;
         this.name = name;
         this.web_url = web_url;
         this.address_string = address_string;
@@ -51,7 +56,6 @@ public class Locations {
         this.email = email;
         this.phone = phone;
         this.rating = rating;
-
     }
 
     public long getId() {
@@ -60,6 +64,14 @@ public class Locations {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Trip_Location getTrip_location() {
+        return trip_location;
+    }
+
+    public void setTrip_location(Trip_Location trip_location) {
+        this.trip_location = trip_location;
     }
 
     public String getName() {
@@ -133,6 +145,4 @@ public class Locations {
     public void setRating(double rating) {
         this.rating = rating;
     }
-
-
 }

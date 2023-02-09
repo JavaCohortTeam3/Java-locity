@@ -31,8 +31,7 @@
             <div class="card-columns">
                 <div class="card" th:each="search : ${trip}">
                     <div class="card-body">
-                        Id:
-                        <p th:text="${search.getId()}"></p>
+
                         Start Date:
                         <p th:text="${search.getStartDate()}"></p>
                         End Date:
@@ -40,7 +39,7 @@
                         Locale:
                         <p th:text="${search.getName()}"></p>
                         <form th:action="@{/profile}" th:method="post">
-                            <button type="submit" name="id" >Find Trip</button>
+                            <button type="submit" name="id" th:value="${search.getId()}">Find Trip</button>
                         </form>
 
                     </div>
