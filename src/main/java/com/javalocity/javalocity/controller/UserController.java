@@ -181,8 +181,10 @@ public class UserController {
     public RedirectView saveUser(@RequestParam("image") MultipartFile multipartFile) throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
         User user1 = (User)userDao.getReferenceById(user.getId());
-        if (!user1.getProfile_img().equals(null)) {
+        System.out.println("user1.getP = " + user1.getProfile_img());
+        if (!user1.getProfile_img().isEmpty()) {
             String fileName1 = StringUtils.cleanPath(user1.getProfile_img());
             String uploadDir1 = "src/main/resources/static/images/" + user1.getId();
             FileUploadUtil.deleteImg(uploadDir1, fileName1);
