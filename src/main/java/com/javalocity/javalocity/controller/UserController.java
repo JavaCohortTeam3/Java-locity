@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Controller
 public class UserController {
     @Autowired
@@ -189,11 +189,17 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         User user1 = (User)userDao.getReferenceById(user.getId());
+        if (!user1.getProfile_img().isEmpty()) {
+            String fileName1 = StringUtils.cleanPath(user1.getProfile_img());
+            String uploadDir1 = "src/main/resources/static/images/" + user1.getId();
+            FileUploadUtil.deleteImg(uploadDir1, fileName1);
+        }
+
         user1.setProfile_img(fileName);
         userDao.save(user1);
         String uploadDir = "src/main/resources/static/images/" + user1.getId();
 
-//        String uploadDir = "user-photos/" + user1.getId();
+
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return new RedirectView("/account/info", true);
     }
