@@ -57,7 +57,11 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login?logout")
                 .and()
                 .authorizeHttpRequests()
+<<<<<<< HEAD
                 .requestMatchers("/login", "/register", "/", "/css/**","/error","/images/**")
+=======
+                .requestMatchers("/login", "/register", "/", "/trip/**", "/css/**","/error","/images/**", "/JS/register.js")
+>>>>>>> 5b5e177cccaa77a3dc89c03a983e8200dd4d2b6b
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()

@@ -61,9 +61,12 @@ public class UserController {
         if (userDao.findByUsername(user.getUsername()) != null) {
             validRegister = false;
             model.addAttribute("usernameAlreadyInUse", true);
-        } else if (userDao.findByEmail(user.getEmail()) != null) {
+            model.addAttribute("usernameInUse", (String) user.getUsername());
+
+        } else if (userDao.findByEmail(user.getEmail()) != null){
             validRegister = false;
             model.addAttribute("emailAlreadyInUse", true);
+            model.addAttribute("emailInUse", (String) user.getEmail());
         }
         if (validRegister) {
             System.out.println(user);
