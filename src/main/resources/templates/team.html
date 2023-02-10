@@ -3,21 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Java-locity</title>
+    <title>The A-Team</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
-<div class="container">
-    <div class="card">
-        <img th:src="@{images/machuPicchu.jpeg}" class="card-img" alt="bamboo forest">
-        <div class="card-img-overlay">
-            <h1 class="d-flex justify-content-center align-items-center">JAVA-LOCITY</h1>
-            <h2 class="d-flex justify-content-center align-items-center text-light">MAKING THE WORLD A SMALLER PLACE</h2>
-            <h3 class="d-flex justify-content-center align-items-center text-light">ONE TRIP AT A TIME</h3>
-        </div>
-    </div>
+<div class="container d-flex justify-content-center">
+    <h1>OUR ALL-STAR TEAM</h1>
+
 </div>
 <section>
     <div class="container py-5">
@@ -25,37 +19,37 @@
             <div class="row row-cols-1 row-cols-md-2 d-flex justify-content-center">
                 <div class="col mb-4">
                     <div class="card bg-dark">
+                        <img th:src="@{images/team/Wilson.jpeg}" class="card-img-top" alt="Wilson">
                         <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                            <h3 class="fw-bold text-warning card-text mb-2">Wilson Syring</h3>
+                            <a href="https://www.linkedin.com/in/wilson-syring-176aa6255/">LinkedIn</a>
                         </div>
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="card bg-dark">
+                        <img th:src="@{images/team/Dustin.jpeg}" class="card-img-top" alt="Dustin">
                         <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                            <h3 class="fw-bold text-warning card-text mb-2">Dustin Zook</h3>
+                            <a href="https://www.linkedin.com/in/dustin-zook/">LinkedIn</a>
                         </div>
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="card bg-dark">
+                        <img th:src="@{images/team/Matt.jpeg}" class="card-img-top" alt="Matt">
                         <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                            <h3 class="fw-bold text-warning card-text mb-2">Matthew Wiram</h3>
+                            <a href="https://www.linkedin.com/in/matthew-wiram-9a6a95242/">LinkedIn</a>
                         </div>
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="card bg-dark">
+                        <img th:src="@{images/team/Isaiah.jpeg}" class="card-img-top" alt="Isaiah">
                         <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                            <h3 class="fw-bold text-warning card-text mb-2">Isaiah Cornelius</h3>
+                            <a href="https://www.linkedin.com/in/isaiah-cornelius-367855255/">LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -64,8 +58,6 @@
     </div>
 </section>
 
-
 <footer th:replace="~{partials :: footer}"></footer>
-
 </body>
 </html>
