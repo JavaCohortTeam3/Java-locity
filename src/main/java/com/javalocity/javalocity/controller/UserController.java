@@ -82,7 +82,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginPage(@ModelAttribute User user) {
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/logout")
