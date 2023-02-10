@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/login?logout")
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/login", "/register", "/", "/trip/**", "/css/**","/error","/images/**")
+                .requestMatchers("/login", "/register", "/", "/trip/**", "/css/**","/error","/images/**", "/JS/register.js")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()

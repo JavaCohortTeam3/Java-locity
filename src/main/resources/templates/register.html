@@ -13,25 +13,47 @@
 
     <h2>User Registration Form</h2>
     <form th:action="@{/register}" th:object="${user}" method="post">
-        <!--Error message if user is trying to register a username that already exists in db-->
-        <div th:if="${usernameAlreadyInUse}">This username is already in use, please enter another username.</div>
+
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" class="form-control" id="username" th:field="*{username}"/>
+            <!--Error message if user is trying to register a username that already exists in db-->
+            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use, please enter another username.</div>
+            <div id="usernameIsEmpty">Username Is Required</div>
+            <br>
         </div>
-        <!--Error message if user is trying to register an email that already exists in db-->
-        <div th:if="${emailAlreadyInUse}">This email is already in use, please enter another email</div>
+
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" th:field="*{email}"/>
+            <!--Error message if user is trying to register an email that already exists in db-->
+            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}" />  is already in use, please enter another email</div>
+            <div id="emailIsEmpty">Email Is Required</div>
+            <br>
         </div>
+
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" th:field="*{password}"/>
+            <div id="passwordIsEmpty">Please Enter A Password</div>
+            <br>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirmPassword"/>
+            <div id="confirmPasswordIsEmpty">Please Confirm Your Password</div>
+            <div id="passwordsDoNotMatch">Passwords do not match</div>
+            <br>
+        </div>
+
+        <button id="registerSubmit" type="submit" class="btn btn-info">Submit</button>
+
     </form>
 </div>
+
+
 <footer th:replace="~{partials :: footer}"></footer>
+<script th:inline="javascript" type="text/javascript" th:src="@{/JS/register.js}"></script>
 </body>
 </html>
