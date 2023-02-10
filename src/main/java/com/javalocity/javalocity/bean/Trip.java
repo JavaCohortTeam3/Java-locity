@@ -32,7 +32,7 @@ public class Trip {
     @OneToOne
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trip")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "trip")
     private List<Trip_Location> trip_location;
 
     public Trip() {}

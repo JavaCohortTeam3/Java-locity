@@ -125,10 +125,14 @@ public class UserController {
     @GetMapping("/account/info")
     public String accountInfoGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user1 = userDao.getOne(user.getId());
-        String pic = "/images/" + user1.getId() +"/"+ user1.getProfile_img();
-        System.out.println("pic = " + pic);
-        model.addAttribute("pic", pic);
+        User user1 = userDao.getReferenceById(user.getId());
+        String pic = "src/main/resources/static/images/" + user1.getId() +"/"+ user1.getProfile_img();
+        String pic1 = "/images/" + user1.getId() +"/"+ user1.getProfile_img();
+
+
+
+
+        model.addAttribute("pic", pic1);
         model.addAttribute("user", user);
         return "accountInfo";
     }
@@ -188,8 +192,32 @@ public class UserController {
         user1.setProfile_img(fileName);
         userDao.save(user1);
         String uploadDir = "src/main/resources/static/images/" + user1.getId();
+
 //        String uploadDir = "user-photos/" + user1.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return new RedirectView("/account/info", true);
+    }
+
+    @PostMapping("/profile/delete")
+    public String deletePic() throws IOException {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user1 = userDao.getReferenceById(user.getId());
+        String fileName = StringUtils.cleanPath(user1.getProfile_img());
+        String uploadDir = "src/main/resources/static/images/" + user1.getId();
+        FileUploadUtil.deleteImg(uploadDir, fileName);
+        user1.setProfile_img(null);
+        userDao.save(user1);
+        return "redirect:/account/info";
+    }
+
+    @PostMapping("/trip/delete")
+    public String deleteTrip(@RequestParam("idd") long id) {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            Trip trip = tripDao.getReferenceById(id);
+
+            tripDao.deleteById(trip.getId());
+
+        return "redirect:/profile";
     }
 }

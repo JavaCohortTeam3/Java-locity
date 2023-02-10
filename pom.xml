@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -80,6 +80,13 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>3.0.2</version>
+			<type>pom</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -91,6 +98,7 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 	<repositories>

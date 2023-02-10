@@ -15,7 +15,7 @@ public class Trip_Location {
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private Locations locations;
 
     @Column
