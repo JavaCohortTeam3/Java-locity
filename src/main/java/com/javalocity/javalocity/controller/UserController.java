@@ -92,12 +92,9 @@ public class UserController {
 
     @GetMapping("/profile")
     public String profilePage(@ModelAttribute User user, Model model, HttpSession session) {
-
         User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Trip> trip = tripDao.findByUser(user1);
-
         model.addAttribute("trip", trip);
-
         return "profile";
     }
 
@@ -128,10 +125,6 @@ public class UserController {
         User user1 = userDao.getReferenceById(user.getId());
         String pic = "src/main/resources/static/images/" + user1.getId() +"/"+ user1.getProfile_img();
         String pic1 = "/images/" + user1.getId() +"/"+ user1.getProfile_img();
-
-
-
-
         model.addAttribute("pic", pic1);
         model.addAttribute("user", user);
         return "accountInfo";
@@ -225,5 +218,9 @@ public class UserController {
             tripDao.deleteById(trip.getId());
 
         return "redirect:/profile";
+    }
+    @GetMapping("/team")
+    public String teamPage() {
+        return "/team";
     }
 }
