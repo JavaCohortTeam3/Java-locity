@@ -182,7 +182,7 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         User user1 = (User)userDao.getReferenceById(user.getId());
-        if (!user1.getProfile_img().isEmpty()) {
+        if (!user1.getProfile_img().isBlank()) {
             String fileName1 = StringUtils.cleanPath(user1.getProfile_img());
             String uploadDir1 = "src/main/resources/static/images/" + user1.getId();
             FileUploadUtil.deleteImg(uploadDir1, fileName1);
