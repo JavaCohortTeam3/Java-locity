@@ -183,7 +183,7 @@ public class UserController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         User user1 = (User)userDao.getReferenceById(user.getId());
-
+        System.out.println(multipartFile.getSize());
         if (user1.getProfile_img() != null) {
             String fileName1 = StringUtils.cleanPath(user1.getProfile_img());
             String uploadDir1 = "src/main/resources/static/images/" + user1.getId();
