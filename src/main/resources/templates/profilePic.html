@@ -5,22 +5,23 @@
     <meta charset="UTF-8">
     <title>Profile Picture YAY!</title>
     <div th:insert="~{partials :: header}"></div>
+    <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <div class="container-fluid">
-<form th:action="@{/profile/profilePic}"
-      th:object="${user}" method="post"
-      enctype="multipart/form-data">
-
-    <h1>Upload a profile picture!</h1>
-    <div>
-        <label>Photos:</label>
-        <input type="file" name="image" accept="image/png, image/jpeg" />
-        <input class="btn btn-primary" type="submit" value="Upload File"/>
-    </div>
-
-</form>
+    <form th:action="@{/profile/profilePic}"
+          th:object="${user}" method="post"
+          enctype="multipart/form-data">
+        <div class="container">
+            <h1 class="d-flex justify-content-center mt-3">Upload a profile picture!</h1>
+            <p class="d-flex justify-content-center mt-3">Here you can choose a picture to upload to your profile.</p>
+            <div class="d-flex justify-content-center mt-3">
+                <input class="form-control bg-transparent text-warning" type="file" id="pic" name="image" accept="image/png, image/jpeg"/>
+                <input class="btn btn-info ms-3" type="submit" value="Upload File"/>
+            </div>
+        </div>
+    </form>
 </div>
 
 <footer th:replace="~{partials :: footer}"></footer>

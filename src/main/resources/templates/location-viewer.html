@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Log In</title>
+    <title>Trip view info</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
+<h1 class="d-flex justify-content-center mt-3">Trip selection information</h1>
+<p class="d-flex justify-content-center mt-3">This is information about your selected hotel, restaurant, or attraction.</p>
 
-<form th:action="@{/location/viewer}" th:method="post">
+<form class="ms-2" th:action="@{/location/viewer}" th:method="post">
 <input type="hidden" name="hidden" th:value="${id}" id="hidden">
 <input type="hidden" name="name" id="name">
 <input type="hidden" name="web_url" id="web_url">
@@ -28,9 +30,9 @@ Start Time:
 <h6 th:text="${start}"></h6>
 End Time:
 <h6 th:text="${end}"></h6>
-<button>Save Trip</button>
+<button class="btn btn-info m-2">Save to Trip</button>
 </form>
-<div id="display"></div>
+<div class="m-1" id="display"></div>
 <footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>

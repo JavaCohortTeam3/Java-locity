@@ -7,20 +7,23 @@
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
+<h1 class="d-flex justify-content-center mt-3">Trip Details Selection</h1>
+<p class="d-flex justify-content-center mt-3">Here you can choose the details of your itinerary and add different aspects like choosing a hotel or adding an attraction you would like to visit. </p>
 <input type="hidden" th:value="${location}" id="hidden">
-<form th:action="@{/trip/view}">
-    <button type="submit">Finalize Trip</button>
+<form class="m-2" th:action="@{/trip/view}">
+    <button class="btn btn-info ms-3" type="submit">Finalize Trip</button>
 </form>
+<div class="m-2">
 Choose Your Trip Details:
-<select name="details" id="details">
+<select  name="details" id="details">
     <option value=""></option>
     <option value="restaurants">Restaurants</option>
     <option value="hotels">Hotels</option>
     <option value="attractions">Attractions</option>
 </select>
-
-<form th:action="@{/trip/details}" th:method="post">
-    Date:  <input type="date" name="begin"
+</div>
+<form class="m-2" th:action="@{/trip/details}" th:method="post">
+    Date:  <input class type="date" name="begin"
                         placeholder="dd-mm-yyyy" value=""
                         th:min="${start}" th:max="${end}" required>
     Start Time: <input type="time" name="start" value="" required />
