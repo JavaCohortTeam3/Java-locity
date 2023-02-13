@@ -37,7 +37,7 @@ public class TripController {
 
     @GetMapping("/trip/locations")
     public String findLocale() {
-        return "/trip-location";
+        return "trip-location";
     }
     @PostMapping("/trip/locations")
     public String getLocale(@RequestParam("location") String location, Model model, HttpSession session, @RequestParam("begin") String start, @RequestParam("end") String end, @RequestParam("title") String title) {

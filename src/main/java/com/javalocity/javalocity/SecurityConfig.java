@@ -44,10 +44,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
 
-//                .csrf().disable()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/").permitAll()
-//                .and()
+                .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/").permitAll()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/profile")
@@ -60,7 +60,7 @@ public class SecurityConfig {
 
 
 
-                .requestMatchers("/login", "/register", "/","/team", "/trip/**", "/css/**","/error","/images/**", "/JS/register.js")
+                .requestMatchers("/login", "/register", "/","/team", "/css/**","/error","/images/**", "/JS/register.js")
 
                 .permitAll()
                 .and()
