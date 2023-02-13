@@ -32,6 +32,9 @@
                         <form th:action="@{/trip/delete}" th:method="post">
                             <button type="submit" name="idd" th:value="${search.getId()}" class="btn btn-info mt-2">Delete Trip</button>
                         </form>
+	                    <form th:action="@{/trip/add}" th:method="post">
+		                    <button type="submit" name="addToTrip" th:value="${search.getId}" class="btn btn-info mt-2">Add to Trip</button>
+	                    </form>
 
                     </div>
                 </div>
