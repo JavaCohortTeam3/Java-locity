@@ -142,4 +142,14 @@ public class TripController {
     public String viewTrip() {
         return "redirect:/profile";
     }
+
+    @PostMapping("/trip/add")
+    public String addToTrip(@RequestParam("addToTrip") long id, HttpSession session){
+Trip trip = (Trip) tripDao.getReferenceById(id);
+
+session.setAttribute("location", trip.getDescription());
+session.setAttribute("trip", trip);
+
+        return "redirect:/trip/details";
+    }
 }
