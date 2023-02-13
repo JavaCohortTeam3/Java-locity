@@ -9,20 +9,26 @@
 </head>
 <body>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+<link rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css">
 <nav th:insert="~{partials :: navbar}"></nav>
-<form th:action="@{/trip/locations}" th:method="post">
-    <input type="hidden" name="title" id="title">
-    <input type="hidden" name="location" id="location">
-    <button id="submission">Submit</button>
-    Trip Start:  <input type="date" name="begin"
-                        placeholder="dd-mm-yyyy" value=""
-                        min="1997-01-01" max="2030-12-31" required>
-    Trip End:   <input type="date" name="end"
-                       placeholder="dd-mm-yyyy" value=""
-                       min="1997-01-01" max="2030-12-31" required>
-</form>
-<div id='map' style='width: 80vw; height: 80vh; margin: auto'></div>
+<h1 class="d-flex justify-content-center mt-2">Plan your trip</h1>
+<p class="d-flex justify-content-center">Here you can select the dates and start location of your trip.</p>
+<div class="d-flex justify-content-center mt-3">
+    <form th:action="@{/trip/locations}" th:method="post">
+        <input type="hidden" name="title" id="title">
+        <input type="hidden" name="location" id="location">
+        Trip Start: <input type="date" name="begin"
+                           placeholder="dd-mm-yyyy" value=""
+                           min="1997-01-01" max="2030-12-31" required>
+        Trip End: <input type="date" name="end"
+                         placeholder="dd-mm-yyyy" value=""
+                         min="1997-01-01" max="2030-12-31" required>
+        <button class="btn btn-info m-1" id="submission">Submit</button>
+    </form>
+</div>
+<div class="mt-2" id='map' style='width: 80vw; height: 80vh; margin: auto'></div>
 <footer th:replace="~{partials :: footer}"></footer>
 <script th:inline="javascript" type="text/javascript" th:src="@{/JS/locationAPIcall.js}"></script>
 </body>

@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <!--UPDATE THE TITLE-->
+     <meta charset="UTF-8">
     <title>Account</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
@@ -11,8 +10,9 @@
 <nav th:insert="~{partials :: navbar}"></nav>
 <div class="container mt-5">
     <div class="row">
+        <h1 class="d-flex justify-content-center"> Your Account Info</h1>
         <div class="col-md-4">
-            <img th:src="@{${pic}}"  alt="Profile Picture" class="profile-pic">
+            <img th:src="@{${pic}}" alt="Profile Picture" class="profile-pic">
 
             <br>
             User ID: <span th:text="${#authentication.principal.id}"/>
@@ -21,15 +21,17 @@
             <br>
             Email: <span th:text="${#authentication.principal.email}"/>
             <br>
-            <form th:action="@{/account/edit}" th:method="get">
-                <input class="btn btn-primary" type="submit" value="Edit Account" />
-            </form>
-            <form th:action="@{/profile/profilePic}" th:method="get">
-                <input class="btn btn-primary" type="submit" value="Edit Profile Picture" />
-            </form>
-            <form th:action="@{/profile/delete}" th:method="post">
-                <input class="btn btn-primary" type="submit" value="Delete Profile Picture" />
-            </form>
+            <div class="row">
+                <form th:action="@{/account/edit}" th:method="get">
+                    <input class="btn btn-info m-1" type="submit" value="Edit Account"/>
+                </form>
+                <form th:action="@{/profile/profilePic}" th:method="get">
+                    <input class="btn btn-info m-1" type="submit" value="Edit Profile Picture"/>
+                </form>
+                <form th:action="@{/profile/delete}" th:method="post">
+                    <input class="btn btn-info m-1" type="submit" value="Delete Profile Picture"/>
+                </form>
+            </div>
 
         </div>
     </div>
