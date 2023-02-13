@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Account</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
+<h1 class="d-flex justify-content-center m-3"> Your Account Info</h1>
+<p class="d-flex justify-content-center m-3"> Here you can view your account information.</p>
 <div class="container mt-5">
-    <div class="row">
-        <h1 class="d-flex justify-content-center"> Your Account Info</h1>
+    <div class="row d-flex justify-content-center">
+
         <div class="col-md-4">
             <img th:src="@{${pic}}" alt="Profile Picture" class="profile-pic">
+            <div class="m-1">
 
-            <br>
-            User ID: <span th:text="${#authentication.principal.id}"/>
-            <br>
-            Username: <span th:text="${#authentication.principal.username}"/>
-            <br>
-            Email: <span th:text="${#authentication.principal.email}"/>
-            <br>
+                <br>
+                User ID: <span th:text="${#authentication.principal.id}"/>
+                <br>
+                Username: <span th:text="${#authentication.principal.username}"/>
+                <br>
+                Email: <span th:text="${#authentication.principal.email}"/>
+                <br>
+            </div>
             <div class="row">
                 <form th:action="@{/account/edit}" th:method="get">
                     <input class="btn btn-info m-1" type="submit" value="Edit Account"/>
                 </form>
                 <form th:action="@{/profile/profilePic}" th:method="get">
-                    <input class="btn btn-info m-1" type="submit" value="Edit Profile Picture"/>
+                    <input class="btn btn-info m-1" type="submit" value="Add Profile Picture"/>
                 </form>
                 <form th:action="@{/profile/delete}" th:method="post">
                     <input class="btn btn-info m-1" type="submit" value="Delete Profile Picture"/>
