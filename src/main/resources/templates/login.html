@@ -1,37 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <title>Log In</title>
-  <div th:insert="~{partials :: header}"></div>
-  <div th:replace="~{partials :: css}"></div>
+    <title>Log In</title>
+    <div th:insert="~{partials :: header}"></div>
+    <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
-<h1>Log In</h1>
-<div th:if="${param.error}">
-  Invalid Username and Password.
+<div class="container">
+    <h1 class="d-flex justify-content-center mt-3">Log In to Enjoy Our Service!</h1>
+    <div th:if="${param.error}">
+        Invalid Username and Password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form class="form-group" th:action="@{/login}" method="post">
+        <label for="username">Username</label>
+        <input class="form-control bg-transparent text-warning" id="username" name="username" type="text"/>
+        <label for="password">Password</label>
+        <input class="form-control bg-transparent text-warning" id="password" name="password" type="password"/>
+        <input type="submit" value="Log In" class="btn btn-info mt-2"/>
+    </form>
 </div>
-<div th:if="${param.logout}">
-  You have been logged out.
+<div class="container">
+    <div class="card shadow mt-3">
+        <img th:src="@{images/bambooForest.jpeg}" class="card-img" alt="bamboo forest">
+        <div class="card-img-overlay">
+            <h1 class="d-flex justify-content-center align-items-center">Visit the bamboo</h1>
+            <h1 class="d-flex justify-content-center align-items-center">forest of Kyoto Japan</h1>
+        </div>
+    </div>
 </div>
-
-<form th:action="@{/login}" method="post">
-  <label for="username">Username</label>
-  <input id="username" name="username" type="text" />
-  <label for="password">Password</label>
-  <input id="password" name="password" type="password" />
-  <input type="submit" value="Log In" />
-</form>
-
-
-
-
-
-
-
-
 
 
 <footer th:replace="~{partials :: footer}"></footer>
