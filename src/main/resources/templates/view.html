@@ -11,7 +11,14 @@
     <h1 class="d-flex justify-content-center text-warning mb-3">Previous Planed Trips:</h1>
     <h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen trip!</h5>
     <div class="card-columns">
+
+        <div class="card" th:each="locations, i : ${locations}">
+	        <form th:action="@{/view}" th:method="post">
+		        <button type="submit" name="locationId" th:value="${trips[i.index].getId}">Remove location</button>
+	        </form>
+
         <div class="card bg-dark" th:each="locations, i : ${locations}">
+
             <div class="card-body">
                 Date:
                 <p th:text="${trips[i.index].getStart_date}"></p>
