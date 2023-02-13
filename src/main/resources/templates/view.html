@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Log In</title>
+	<title>Planned Trip</title>
 	<div th:insert="~{partials :: header}"></div>
 	<div th:replace="~{partials :: css}"></div>
 </head>
@@ -9,13 +9,12 @@
 	<nav th:insert="~{partials :: navbar}"></nav>
 	<div class="col-md-6">
 		<h1 class="d-flex justify-content-center text-warning mb-3">Previous Planed Trips:</h1>
-		<h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen trip!</h5>
+		<p class="d-flex justify-content-center text-warning m-3">This is the detailed plan for your chosen trip!Here you can view all aspects of your chosen itinerary, and remove aspects from the itinerary</p>
 		<div class="card-columns">
 			
-			
-			<div class="card bg-dark" th:each="locations, i : ${locations}">
+			<div class="card bg-dark m-2" th:each="locations, i : ${locations}">
 				
-				<div class="card-body">
+				<div class="card-body m-2">
 					Date:
 					<p th:text="${trips[i.index].getStart_date}"></p>
 					Start Time:
