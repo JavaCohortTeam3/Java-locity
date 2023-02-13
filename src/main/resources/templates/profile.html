@@ -9,28 +9,15 @@
 </head>
 <body/>
 <nav th:insert="~{partials :: navbar}"></nav>
-<h1>Welcome <span th:text="${#authentication.principal.username}"/>!</h1>
+
 <div class="container mt-5">
+    <h1>Welcome <span th:text="${#authentication.principal.username}"/>!</h1>
     <div class="row">
-<!--        <div class="col-md-4">-->
-<!--            <img src="{{profilePicture}}" alt="Profile Picture" class="profile-pic">-->
-<!--            <br>-->
-<!--            User ID: <span th:text="${#authentication.principal.id}"/>-->
-<!--            <br>-->
-<!--            Username: <span th:text="${#authentication.principal.username}"/>-->
-<!--            <br>-->
-<!--            Email: <span th:text="${#authentication.principal.email}"/>-->
-<!--            <br>-->
-<!--            <form th:action="@{/profile/edit}" th:method="get">-->
-<!--&lt;!&ndash;                <input type="hidden" id="id" th:value="${#authentication.principal.id}">&ndash;&gt;-->
-<!--                <input class="btn btn-primary" type="submit" value="Edit Profile" />-->
-<!--            </form>-->
-<!--&lt;!&ndash;            <a class="btn btn-primary" href="/profile/edit">Edit Profile</a>&ndash;&gt;-->
-<!--        </div>-->
         <div class="col-md-8">
-            <h5 class="text-secondary mb-3">Previous Planed Trips:</h5>
+            <h3 class="text-warning mb-3">Previous Planed Trips:</h3>
+            <h5 class="text-warning mb-3">This is a list of the trips you have planned!</h5>
             <div class="card-columns">
-                <div class="card" th:each="search : ${trip}">
+                <div class="card bg-dark" th:each="search : ${trip}">
                     <div class="card-body">
 
                         Start Date:
