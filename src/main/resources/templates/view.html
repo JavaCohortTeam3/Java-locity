@@ -1,51 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Log In</title>
-    <div th:insert="~{partials :: header}"></div>
-    <div th:replace="~{partials :: css}"></div>
+	<title>Log In</title>
+	<div th:insert="~{partials :: header}"></div>
+	<div th:replace="~{partials :: css}"></div>
 </head>
 <body>
-<nav th:insert="~{partials :: navbar}"></nav>
-<div class="col-md-6">
-    <h1 class="d-flex justify-content-center text-warning mb-3">Previous Planed Trips:</h1>
-    <h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen trip!</h5>
-    <div class="card-columns">
-
-        <div class="card" th:each="locations, i : ${locations}">
-	        <form th:action="@{/view}" th:method="post">
-		        <button type="submit" name="locationId" th:value="${trips[i.index].getId}">Remove location</button>
-	        </form>
-
-        <div class="card bg-dark" th:each="locations, i : ${locations}">
-
-            <div class="card-body">
-                Date:
-                <p th:text="${trips[i.index].getStart_date}"></p>
-                Start Time:
-                <p th:text="${trips[i.index].getStart_time}"></p>
-                End Time:
-                <p th:text="${trips[i.index].getEnd_time}"></p>
-                Location:
-                <p th:text="${locations.getName()}"></p>
-                Address:
-                <p th:text="${locations.getAddress_string()}"></p>
-                Rating:
-                <p th:text="${locations.getRating()}"></p>
-                Phone:
-                <p th:text="${locations.getPhone()}"></p>
-
-                <a th:href="${locations.getWeb_url()}" >Website</a>
-
-                <img th:src="${locations.getPicture}" class="card-img" alt="">
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer th:replace="~{partials :: footer}"></footer>
+	<nav th:insert="~{partials :: navbar}"></nav>
+	<div class="col-md-6">
+		<h1 class="d-flex justify-content-center text-warning mb-3">Previous Planed Trips:</h1>
+		<h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen trip!</h5>
+		<div class="card-columns">
+			
+			
+			<div class="card bg-dark" th:each="locations, i : ${locations}">
+				
+				<div class="card-body">
+					Date:
+					<p th:text="${trips[i.index].getStart_date}"></p>
+					Start Time:
+					<p th:text="${trips[i.index].getStart_time}"></p>
+					End Time:
+					<p th:text="${trips[i.index].getEnd_time}"></p>
+					Location:
+					<p th:text="${locations.getName()}"></p>
+					Address:
+					<p th:text="${locations.getAddress_string()}"></p>
+					Rating:
+					<p th:text="${locations.getRating()}"></p>
+					Phone:
+					<p th:text="${locations.getPhone()}"></p>
+					
+					<a th:href="${locations.getWeb_url()}">Website</a>
+					
+					<img th:src="${locations.getPicture}" class="card-img" alt="">
+					
+					<form th:action="@{/view}" th:method="post">
+						<button type="submit" name="locationId" th:value="${trips[i.index].getId}">Remove location</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
 
