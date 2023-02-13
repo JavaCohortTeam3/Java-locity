@@ -16,16 +16,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Controller
@@ -117,6 +115,19 @@ public class UserController {
         }
         model.addAttribute("locations", locations);
         return "view";
+    }
+
+    @PostMapping("/view")
+    public String removeLocation(@RequestParam("locationId") long id){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Locations location = locationsDao.getReferenceById(id);
+        Trip_Location trip_location = (Trip_Location) trip_locationDao.getReferenceById(id);
+//        trip_locationDao.deleteByLocation();
+        trip_locationDao.delete(trip_location);
+        System.out.println("test");
+//        System.out.println();
+        System.out.println(id);
+        return "redirect:profile";
     }
 
     @GetMapping("/account/info")

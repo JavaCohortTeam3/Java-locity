@@ -10,4 +10,6 @@ import java.util.List;
 public interface LocationsRepository extends JpaRepository<Locations, Long> {
     Locations getLocationByName(String name);
     List<Locations> getLocationsByName(String name);
+
+    Locations deleteLocationsById(long id);
 }
