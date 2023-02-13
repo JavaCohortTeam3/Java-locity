@@ -27,10 +27,10 @@
                         Locale:
                         <p th:text="${search.getName()}"></p>
                         <form th:action="@{/profile}" th:method="post">
-                            <button type="submit" name="id" th:value="${search.getId()}">Find Trip</button>
+                            <button type="submit" name="id" th:value="${search.getId()}" class="btn btn-info mt-2">Find Trip</button>
                         </form>
                         <form th:action="@{/trip/delete}" th:method="post">
-                            <button type="submit" name="idd" th:value="${search.getId()}">Delete Trip</button>
+                            <button type="submit" name="idd" th:value="${search.getId()}" class="btn btn-info mt-2">Delete Trip</button>
                         </form>
 
                     </div>
