@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Log In</title>
+    <title>Trip Details</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <h1 class="d-flex justify-content-center mt-3">Trip Details Selection</h1>
-<p class="d-flex justify-content-center mt-3">Here you can choose the details of your itinerary and add different aspects like choosing a hotel or adding an attraction you would like to visit. </p>
+<p class="d-flex justify-content-center mt-3">Here you can choose the details of your itinerary and add different aspects like choosing a hotel or adding an attraction you would like to visit.</p>
+<p class="d-flex justify-content-center mt-3">Start by setting the date and times for the action then click the dropdown to choose an option. Click the Finalize Trip button to lock in the itinerary. </p>
 <input type="hidden" th:value="${location}" id="hidden">
 <form class="m-2" th:action="@{/trip/view}">
     <button class="btn btn-info ms-3" type="submit">Finalize Trip</button>
