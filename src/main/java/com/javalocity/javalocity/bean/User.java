@@ -84,6 +84,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        profile_img = copy.profile_img;
     }
 
     public User(String username, String email, String password) {
