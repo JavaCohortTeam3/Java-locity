@@ -19,43 +19,54 @@
         </div>
     </div>
 </div>
+<div class="card bg-dark m-3">
+    <div class="card-body text-center px-4 py-5 px-md-5">
+        <p class="fw-bold text-info card-text mb-2 fs-1">Welcome to Java-locity!</p>
+        <h5 class="fw-bold card-title mb-1">A unique itinerary planner designed to help you explore the world with ease.
+            With our system you can easily plan the dates and times of you trip down to the minute with one convenient
+            place to store the itinerary.</h5>
+    </div>
+</div>
 <section>
     <div class="container py-5">
-        <div class="mx-auto" style="max-width: 900px;">
-            <div class="row row-cols-1 row-cols-md-2 d-flex justify-content-center">
-                <div class="col mb-4">
-                    <div class="card bg-dark">
-                        <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+        <div class="card bg-dark m-3">
+            <h1 class="d-flex justify-content-center m-2">Top Travel Destinations</h1>
+            <div class="mx-auto" style="max-width: 900px;">
+                <div class="row row-cols-1 row-cols-md-2 d-flex justify-content-center">
+                    <div class="col mb-4">
+                        <div class="card bg-dark">
+                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/yellowstone-national.jpeg}" class="card-img" alt="yellowstone">
+                            <div class="card-img-overlay">
+                                <h1 class="d-flex justify-content-center">Visit Yellowstone</h1>
+                                <h1 class="d-flex justify-content-center">National park</h1>
+                            </div></a>
                         </div>
                     </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card bg-dark">
-                        <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                    <div class="col mb-4">
+                        <div class="card bg-dark">
+                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/maui hawaii.jpeg}" class="card-img" alt="hawaii">
+                            <div class="card-img-overlay">
+                                <h1 class="d-flex justify-content-center">Explore Maui</h1>
+                                <h1 class="d-flex justify-content-center">Hawaii</h1>
+                            </div></a>
                         </div>
                     </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card bg-dark">
-                        <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                    <div class="col mb-4">
+                        <div class="card bg-dark">
+                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/orlando florida.jpeg}" class="card-img" alt="Florida">
+                            <div class="card-img-overlay">
+                                <h1 class="d-flex justify-content-center">Say Hello To</h1>
+                                <h1 class="d-flex justify-content-center">Orlando Florida</h1>
+                            </div></a>
                         </div>
                     </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card bg-dark">
-                        <div class="card-body text-center px-4 py-5 px-md-5">
-                            <p class="fw-bold text-info card-text mb-2">Fully Managed</p>
-                            <h5 class="fw-bold card-title mb-3">Lorem ipsum dolor sit&nbsp;nullam et quis ad cras
-                                porttitor</h5>
+                    <div class="col mb-4">
+                        <div class="card bg-dark">
+                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/puntaCana.jpeg}" class="card-img" alt="Dominican republic">
+                            <div class="card-img-overlay">
+                                <h1 class="d-flex justify-content-center">Jump Into</h1>
+                                <h1 class="d-flex justify-content-center">Punta Cana</h1>
+                            </div></a>
                         </div>
                     </div>
                 </div>
