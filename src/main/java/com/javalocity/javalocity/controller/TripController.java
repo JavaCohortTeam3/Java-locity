@@ -67,7 +67,7 @@ public class TripController {
         model.addAttribute("start", trip.getStartDate());
         model.addAttribute("end", trip.getEndDate());
 
-        return "/trip-details";
+        return "trip-details";
     }
     @PostMapping("/trip/details")
     public String setDetails(@RequestParam("idd") int id, HttpSession session, @RequestParam("start") String start, @RequestParam("end") String end, @RequestParam("begin") String begin) {
@@ -85,7 +85,7 @@ public class TripController {
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
-        return "/location-viewer";
+        return "location-viewer";
     }
 
     @PostMapping("/location/viewer")

@@ -75,7 +75,7 @@ public class UserController {
             userDao.save(user);
             return "redirect:/login";
         } else {
-            return "/register";
+            return "register";
         }
 
     }
@@ -87,7 +87,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logoutPage(@ModelAttribute User user) {
-        return "/logout";
+        return "reidirect:/login?logout";
     }
 
     @GetMapping("/profile")
