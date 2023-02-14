@@ -274,6 +274,6 @@ public class UserController {
     }
     @GetMapping("/team")
     public String teamPage() {
-        return "/team";
+        return "team";
     }
 }
