@@ -1,14 +1,12 @@
 package com.javalocity.javalocity.controller;
 
-import com.javalocity.javalocity.bean.Locations;
-import com.javalocity.javalocity.bean.Trip;
-import com.javalocity.javalocity.bean.Trip_Location;
-import com.javalocity.javalocity.bean.User;
+import com.javalocity.javalocity.bean.*;
 import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
 import com.javalocity.javalocity.repository.UserRepository;
 import com.javalocity.javalocity.util.FileUploadUtil;
+import jakarta.persistence.Entity;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -141,6 +139,44 @@ public class UserController {
         return "accountInfo";
     }
 
+    @GetMapping("/account/edit/password")
+    public String editAccountPasswordGet(Model model) {
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", user);
+//        PasswordHolder ph = new PasswordHolder();
+//        ph.setUser(user);
+        model.addAttribute("passwordHolder", new PasswordHolder());
+        return "accountEditPassword";
+    }
+
+    @PostMapping("/account/edit/password")
+    public String editAccountPasswordPost(@ModelAttribute PasswordHolder passwordHolder, Model model) {
+
+        String currentPassword = passwordHolder.getCurrentPassword();
+        String newPassword = passwordHolder.getNewPassword();
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Long oldId = user.getId();
+        String oldUsername = user.getUsername();
+        String oldEmail = user.getEmail();
+        String oldPassword = user.getPassword();
+        String hashNewPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(hashNewPassword);
+
+        User newUser = new User(oldId, oldUsername, oldEmail, hashNewPassword);
+
+        if (passwordEncoder.matches(currentPassword, oldPassword)){
+
+            userDao.save(newUser);
+            model.addAttribute("PasswordHasBeenUpdated", true);
+            return "redirect:/login?logout";
+        } else {
+            model.addAttribute("incorrectPW", true);
+            return "accountEditPassword";
+        }
+    }
+
     @GetMapping("/account/edit")
     public String editAccountGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -150,17 +186,24 @@ public class UserController {
 
     @PostMapping("/account/edit")
     public String editAccountPost(@ModelAttribute User user, Model model) {
+        String passwordToCheck = user.getPassword();
+
         User oldUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String oldUsername = oldUser.getUsername();
         String oldEmail = oldUser.getEmail();
         String oldPassword = oldUser.getPassword();
-        boolean validEdit = true;
+
+        boolean validEdit = false;
         if (!user.getUsername().equals(oldUser.getUsername()) && userDao.findByUsername(user.getUsername()) != null) {
-            validEdit = false;
             model.addAttribute("usernameAlreadyInUse", true);
+            model.addAttribute("usernameInUse", (String) user.getUsername());
         } else if (!user.getEmail().equals(oldUser.getEmail()) && userDao.findByEmail(user.getEmail()) != null) {
-            validEdit = false;
             model.addAttribute("emailAlreadyInUse", true);
+            model.addAttribute("emailInUse", (String) user.getEmail());
+        } else if (!passwordEncoder.matches(passwordToCheck, oldUser.getPassword())) {
+            model.addAttribute("incorrectPW", true);
+        } else {
+            validEdit = true;
         }
         if (validEdit) {
             if (user.getUsername().isEmpty()) {
@@ -168,9 +211,6 @@ public class UserController {
             }
             if (user.getEmail().isEmpty()) {
                 user.setEmail(oldEmail);
-            }
-            if (user.getPassword().isEmpty()) {
-                user.setPassword(oldPassword);
             } else {
                 String pw = passwordEncoder.encode(user.getPassword());
                 user.setPassword(pw);
