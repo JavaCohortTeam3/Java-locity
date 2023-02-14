@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -90,6 +94,7 @@ public class UserController {
     public String profilePage(@ModelAttribute User user, Model model, HttpSession session) {
         User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Trip> trip = tripDao.findByUser(user1);
+
         model.addAttribute("trip", trip);
         return "profile";
     }
@@ -118,12 +123,12 @@ public class UserController {
     @PostMapping("/view")
     public String removeLocation(@RequestParam("locationId") long id){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Locations location = locationsDao.getReferenceById(id);
+
         Trip_Location trip_location = (Trip_Location) trip_locationDao.getReferenceById(id);
-//        trip_locationDao.deleteByLocation();
+
         trip_locationDao.delete(trip_location);
         System.out.println("test");
-//        System.out.println();
+
         System.out.println(id);
         return "redirect:profile";
     }
@@ -132,9 +137,13 @@ public class UserController {
     public String accountInfoGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user1 = userDao.getReferenceById(user.getId());
-        String pic = "src/main/resources/static/images/" + user1.getId() +"/"+ user1.getProfile_img();
-        String pic1 = "/images/" + user1.getId() +"/"+ user1.getProfile_img();
-        model.addAttribute("pic", pic1);
+        if (user1.getProfile_img() == null) {
+
+        } else {
+            model.addAttribute("img", Base64.getEncoder().encodeToString(user1.getProfile_img()));
+        }
+
+
         model.addAttribute("user", user);
         return "accountInfo";
     }
@@ -231,22 +240,15 @@ public class UserController {
     @PostMapping("/profile/profilePic")
     public RedirectView saveUser(@RequestParam("image") MultipartFile multipartFile) throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         User user1 = (User)userDao.getReferenceById(user.getId());
-        System.out.println(multipartFile.getSize());
-        if (user1.getProfile_img() != null) {
-            String fileName1 = StringUtils.cleanPath(user1.getProfile_img());
-            String uploadDir1 = "src/main/resources/static/images/" + user1.getId();
-            FileUploadUtil.deleteImg(uploadDir1, fileName1);
-        }
 
-        user1.setProfile_img(fileName);
+
+        byte [] files = multipartFile.getBytes();
+
+        user1.setProfile_img(files);
         userDao.save(user1);
-        String uploadDir = "src/main/resources/static/images/" + user1.getId();
 
-
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return new RedirectView("/account/info", true);
     }
 
@@ -254,9 +256,7 @@ public class UserController {
     public String deletePic() throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user1 = userDao.getReferenceById(user.getId());
-        String fileName = StringUtils.cleanPath(user1.getProfile_img());
-        String uploadDir = "src/main/resources/static/images/" + user1.getId();
-        FileUploadUtil.deleteImg(uploadDir, fileName);
+
         user1.setProfile_img(null);
         userDao.save(user1);
         return "redirect:/account/info";

@@ -22,8 +22,9 @@ public class User {
     @Column (nullable = false, length = 100)
     private String password;
 
-    @Column (nullable = true, columnDefinition = "TEXT")
-    private String profile_img;
+    @Lob
+    @Column (nullable = true, length = 5000, columnDefinition = "BLOB")
+    private byte [] profile_img;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 //    private List<Post> posts;
@@ -68,11 +69,11 @@ public class User {
         this.password = password;
     }
 
-    public String getProfile_img() {
+    public byte[] getProfile_img() {
         return profile_img;
     }
 
-    public void setProfile_img(String profile_img) {
+    public void setProfile_img(byte [] profile_img) {
         this.profile_img = profile_img;
     }
 
@@ -98,7 +99,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String username, String email, String password, String profile_img) {
+    public User(Long id, String username, String email, String password, byte [] profile_img) {
         this.id = id;
         this.username = username;
         this.email = email;
