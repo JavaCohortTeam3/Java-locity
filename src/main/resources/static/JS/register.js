@@ -67,17 +67,17 @@ function checkIfPasswordsMatch(){
     }
 }
 
-let registerSubmitButton = document.getElementById('registerSubmit');
-registerSubmitButton.setAttribute('disabled', true);
-registerSubmitButton.style.opacity = '.2';
+let SubmitButton = document.getElementById('SubmitButton');
+SubmitButton.setAttribute('disabled', true);
+SubmitButton.style.opacity = '.2';
 
 function checkIfValidRegister(){
     if (boolUsernameHasLength && boolEmailHasLength && boolPasswordHasLength && boolConfirmPasswordHasLength && boolPasswordsMatch){
-        registerSubmitButton.removeAttribute('disabled')
-        registerSubmitButton.style.opacity = '1';
+        SubmitButton.removeAttribute('disabled')
+        SubmitButton.style.opacity = '1';
     } else {
-        registerSubmitButton.setAttribute('disabled', true)
-        registerSubmitButton.style.opacity = '.2';
+        SubmitButton.setAttribute('disabled', true)
+        SubmitButton.style.opacity = '.2';
     }
 }
 

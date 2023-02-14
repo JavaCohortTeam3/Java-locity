@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Edit Profile</title>
+    <title>Edit Account</title>
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <h1 class="d-flex justify-content-center mt-2">Edit Account</h1>
-<h1 class="d-flex justify-content-center">Here you can change your user info</h1>
+<h1 class="d-flex justify-content-center">Here you can update your username and email</h1>
 <div class="container">
     <form th:action="@{/account/edit}" th:method="post" th:object="${user}">
         <input type="hidden" id="id" th:field="*{id}">
         <div class="form-group">
-            <div th:if="${usernameAlreadyInUse}">This username is already in use, please enter another username.</div>
             <label for="username">Username:</label>
-            <input type="text" class="form-control bg-transparent text-warning" id="username" th:field="*{username}"/>
+            <input type="text" class="form-control bg-transparent text-warning" id="username" th:field="*{username}"/>        <!--Error message if user is trying to register a username that already exists in db-->
+            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use, please enter another username.</div>
+
+            <br>
         </div>
         <div class="form-group">
-            <div th:if="${emailAlreadyInUse}">This email is already in use, please enter another email</div>
             <label for="email">Email:</label>
             <input type="email" class="form-control bg-transparent text-warning" id="email" th:field="*{email}"/>
+            <!--Error message if user is trying to register an email that already exists in db-->
+            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}" />  is already in use, please enter another email</div>
+
+            <br>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control bg-transparent text-warning" id="password"
                    th:field="*{password}"/>
+            <div id="passwordIsEmpty">Please Enter Your Current Password</div>
+            <div th:if="${incorrectPW}">The password you entered is incorrect.</div>
+            <br>
         </div>
-        <button type="submit" class="btn btn-info mt-2">Submit</button>
+        <button type="submit" id="SubmitButton" class="btn btn-info mt-2">Submit</button>
 
+    </form>
+<!--    <br>-->
+    <form th:action="@{/account/edit/password}" th:method="get">
+        <button id="EditPasswordSubmitButton" type="submit" class="btn btn-info mt-2">Edit Password</button>
     </form>
 </div>
 
 
+
 <footer th:replace="~{partials :: footer}"></footer>
+<script th:inline="javascript" type="text/javascript" th:src="@{/JS/accountEdit.js}"></script>
 </body>
 </html>
