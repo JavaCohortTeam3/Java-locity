@@ -23,7 +23,7 @@ public class User {
     private String password;
 
     @Lob
-    @Column (nullable = true, length = 5000, columnDefinition = "BLOB")
+    @Column (nullable = true, length = 50000, columnDefinition = "BLOB")
     private byte [] profile_img;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
