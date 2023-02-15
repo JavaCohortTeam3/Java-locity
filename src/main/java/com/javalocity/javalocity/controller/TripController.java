@@ -9,6 +9,7 @@ import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
 import com.javalocity.javalocity.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,7 +82,8 @@ public class TripController {
     }
 
     @GetMapping("/location/viewer")
-    public String view(HttpSession session, Model model) {
+    public String view(HttpSession session, Model model, @Value("${mapKey}") String apiKey) {
+        model.addAttribute("key", apiKey);
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));

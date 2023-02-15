@@ -1,7 +1,8 @@
 "use strict"
 
 let token = "pk.eyJ1IjoibWF0dGhld3dpcmFtIiwiYSI6ImNsOWx2YmJwODFtMnEzdXAyMDFvdHRxcHcifQ.20mYzJo1wfnNRyCTEJMtyw"
-
+let key = "[[${key}]]";
+alert(key)
 let lat;
 let lng;
 
