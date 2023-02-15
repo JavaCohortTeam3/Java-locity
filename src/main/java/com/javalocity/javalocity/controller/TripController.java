@@ -100,7 +100,7 @@ public class TripController {
 
     @GetMapping("/location/viewer")
     public String view(HttpSession session, Model model, @Value("${tripKey}") String tripKey) {
-        model.addAttribute("tripkey", tripKey);
+        model.addAttribute("tripKey", tripKey);
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
