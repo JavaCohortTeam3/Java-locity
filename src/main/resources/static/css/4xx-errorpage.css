@@ -40,6 +40,32 @@ body {
     animation: fly 2s linear infinite;
 }
 
+@media screen and (max-width: 576px){
+    .airplaneAnimation{
+        position: relative;
+        width:200px;
+        height:200px;
+        border-radius:50%;
+        background-color: #caf0f8;
+        overflow: hidden;
+    }
+
+    /*.main {*/
+    /*    position: absolute;*/
+    /*    width: 160px;*/
+    /*    height: 30px;*/
+    /*    background-color: #0077b6;*/
+    /*    !*top:50px;*!*/
+    /*    left:25px;*/
+    /*    border-radius: 0 100px 30px 100px;*/
+    /*    overflow:hidden;*/
+    /*    box-shadow: inset -10px -10px rgba(0,0,0,0.2);*/
+    /*    z-index:2;*/
+    /*}*/
+}
+
+
+
 @keyframes fly {
     0% {transform: translateY(0);}
     25% {transform: translateY(-10px);}
@@ -195,42 +221,143 @@ body {
     box-shadow: 65px 0 #fff;
 }
 
-
-.pollution {
-    position: absolute;
-    background-color: #fff;
-    top: 130px;
-    left: 65px;
-    width: 30px;
-    height: 10px;
-    border-radius: 20px;
-    opacity: 0;
-    animation: up 1s linear infinite;
-}
-
-.pollution:before, .pollution:after {
-    content:"";
-    position: absolute;
-    background-color: #fff;
-    border-radius:20px;
-    opacity:0;
-    width:30px;
-    height:10px;
-}
-.pollution:after {
-    top: 10px;
-    left: -25px;
-    animation: up 2s linear infinite;
-}
-.pollution:before {
-    top: -10px;
-    left: -35px;
-    animation: up 3s linear infinite;
-
-}
-
 @keyframes up {
     20% {opacity: 0.7;}
     35% {left: 100px; opacity: 0.7;}
     70% {left: 70px; opacity: 0;}
+}
+
+@media screen and (max-width: 576px){
+    .main {
+        position: absolute;
+        width: 160px;
+        height: 35px;
+        background-color: #0077b6;
+        top:20px;
+        left:25px;
+        border-radius: 0 100px 30px 100px;
+        overflow:hidden;
+        box-shadow: inset -10px -10px rgba(0,0,0,0.2);
+        z-index:2;
+    }
+
+    .main:before {
+        width:40px;
+        height:8px;
+        border-radius: 0 0 0 30px;
+        left: 135px;
+    }
+
+    .main:after {
+        width: 5px;
+        height: 8px;
+        border-radius:20px;
+        left:150px;
+        box-shadow: -10px 0 #fdc921,20px 0 #fdc921, -30px 0 #fdc921, -40px 0 #fdc921, -50px 0 #fdc921, -60px 0 #fdc921, -70px 0 #fdc921, -80px 0 #fdc921, -90px 0 #fdc921, -100px 0 #fdc921, -110px 0 #fdc921, -120px 0 #fdc921;
+    }
+
+    .wingOne {
+        position: absolute;
+        width:10px;
+        border-right: 15px solid transparent;
+        border-left: 15px solid transparent;
+        border-top: 50px solid #0077b6;
+        height:0;
+        top:39px;
+        left:65px;
+        transform: skew(-45deg) rotateX(30deg);
+        z-index:4;
+    }
+
+    .wingOne:after {
+        content:"";
+        position: absolute;
+        width:15px;
+        height:20px;
+        background-color: #0077b6;
+        top:-76px;
+        left:-100px;
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .wingTwo {
+        position: absolute;
+        width:10px;
+        border-right: 15px solid transparent;
+        border-left: 15px solid transparent;
+        border-bottom: 50px solid #023e8a;
+        height:0;
+        top:-14px;
+        left:70px;
+        transform: skew(45deg) rotateX(30deg);
+    }
+
+    .wingTwo:after {
+        content:"";
+        position: absolute;
+        width:15px;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-bottom: 30px solid #0077b6;
+        height:0;
+        left:-77px;
+        top:20px;
+    }
+
+    .wingTwo:before {
+        content:"";
+        position: absolute;
+        width:15px;
+        height:20px;
+        background-color: #023e8a;
+        left:-67px;
+        top:25px;
+        transform: skew(-55deg);
+    }
+
+    .cloudOne, .cloudTwo, .cloudThree {
+        position: absolute;
+        width: 30px;
+        height: 15px;
+        background-color: #fff;
+        border-radius:100px 100px 0 0;
+    }
+
+    .cloudOne:before, .cloudTwo:before, .cloudThree:before{
+        content:"";
+        position: absolute;
+        width: 15px;
+        height: 7.5px;
+        background-color: #fff;
+        border-radius:100px 100px 0 0;
+        left:-12px;
+        top:7.5px;
+        box-shadow: 38px 0 #fff;
+    }
+
+
+    .plane {
+        position: relative;
+        left:0;
+        top:75px;
+        animation: fly 4s linear infinite;
+    }
+
+    .cloudOne {
+        top:-30px;
+        left:0;
+        animation: cloud 5s linear infinite reverse;
+    }
+
+    .cloudTwo {
+        top:6px;
+        left:89px;
+        animation: cloud 3.5s linear infinite reverse;
+    }
+
+    .cloudThree {
+        top:114px;
+        left:-69px;
+        animation: cloud 4.4s linear infinite reverse;
+    }
 }
