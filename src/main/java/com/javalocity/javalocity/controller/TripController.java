@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -65,6 +67,15 @@ public class TripController {
 
         model.addAttribute("location", session.getAttribute("location"));
         Trip trip = (Trip) session.getAttribute("trip");
+        if (trip_locationDao.findTrip_LocationByTrip(trip) != null) {
+            List<Trip_Location> trip_location = (List<Trip_Location>) trip_locationDao.findTrip_LocationByTrip(trip);
+            List<Locations> locations = new ArrayList<>();
+            for (int i = 0; i < trip_location.size(); i++) {
+                locations.add(locationsDao.getReferenceById(trip_location.get(i).getLocations().getId()));
+            }
+            model.addAttribute("train", locations);
+            model.addAttribute("crazy", trip_location);
+        }
 
         model.addAttribute("start", trip.getStartDate());
         model.addAttribute("end", trip.getEndDate());
@@ -83,8 +94,8 @@ public class TripController {
     }
 
     @GetMapping("/location/viewer")
-    public String view(HttpSession session, Model model, @Value("${mapKey}") String apiKey) {
-        System.out.println(apiKey);
+    public String view(HttpSession session, Model model) {
+
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
@@ -115,7 +126,7 @@ public class TripController {
             location.setLocation_idd((int) session.getAttribute("id"));
             location.setEmail(email);
             location.setPhone(phone.get());
-            location.setRating((double) rating.get());
+            location.setRating(rating.get());
             location.setPicture(picture.get());
             locationsDao.save(location);
         }
