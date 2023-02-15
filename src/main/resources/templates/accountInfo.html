@@ -15,7 +15,12 @@
     <div class="row d-flex justify-content-center">
 
         <div class="col-md-4">
+            <span th:if="${img != null}">
             <img th:src="@{'data:image/;base64,'+${img}}" alt="Profile Picture" class="profile-pic">
+            </span>
+            <span th:unless="${img != null}">
+                <img th:src="@{/images/logo.png}" alt="Profile Picture" class="profile-pic">
+            </span>
             <div class="m-1">
 
                 <br>
