@@ -1,5 +1,6 @@
 package com.javalocity.javalocity.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javalocity.javalocity.bean.Locations;
 import com.javalocity.javalocity.bean.Trip;
 import com.javalocity.javalocity.bean.Trip_Location;
@@ -83,7 +84,7 @@ public class TripController {
 
     @GetMapping("/location/viewer")
     public String view(HttpSession session, Model model, @Value("${mapKey}") String apiKey) {
-        model.addAttribute("key", apiKey);
+        System.out.println(apiKey);
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
