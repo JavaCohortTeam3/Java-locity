@@ -40,7 +40,7 @@
 					
 					<img th:src="${locations.getPicture}" class="card-img" alt="">
 					
-					<form th:action="@{/view}" th:method="post">
+					<form th:action="@{/view}" th:method="post" onsubmit="return confirm('Are you sure you want to remove?');">
 						<button type="submit" name="locationId" th:value="${trips[i.index].getId}" class="btn btn-info mt-2">Remove location</button>
 					</form>
 				</div>

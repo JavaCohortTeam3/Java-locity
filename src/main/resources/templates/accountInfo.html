@@ -38,7 +38,7 @@
                 <form th:action="@{/profile/profilePic}" th:method="get">
                     <input class="btn btn-info m-1" type="submit" value="Add Profile Picture"/>
                 </form>
-                <form th:action="@{/profile/delete}" th:method="post">
+                <form th:action="@{/profile/delete}" th:method="post" onsubmit="return confirm('Are you sure you want to delete?');">
                     <input class="btn btn-info m-1" type="submit" value="Delete Profile Picture"/>
                 </form>
             </div>

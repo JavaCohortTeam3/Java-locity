@@ -30,7 +30,7 @@
                         <form th:action="@{/profile}" th:method="post">
                             <button type="submit" name="id" th:value="${search.getId()}" class="btn btn-info mt-2">View Trip</button>
                         </form>
-                        <form th:action="@{/trip/delete}" th:method="post">
+                        <form th:action="@{/trip/delete}" th:method="post"  onsubmit="return confirm('Are you sure you want to delete?');">
                             <button type="submit" name="idd" th:value="${search.getId()}" class="btn btn-info mt-2">Delete Trip</button>
                         </form>
 	                    <form th:action="@{/trip/add}" th:method="post">
