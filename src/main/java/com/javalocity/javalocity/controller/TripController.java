@@ -66,7 +66,7 @@ public class TripController {
 
     }
     @GetMapping("/trip/details")
-    public String getDetails(Model model, HttpSession session, @Value("${tripKey}") String tripkey) {
+    public String getDetails(Model model, HttpSession session, @Value("${travleKey}") String tripkey) {
 
         model.addAttribute("map", tripkey);
 
@@ -99,7 +99,7 @@ public class TripController {
     }
 
     @GetMapping("/location/viewer")
-    public String view(HttpSession session, Model model, @Value("${tripKey}") String tripKey) {
+    public String view(HttpSession session, Model model, @Value("${travleKey}") String tripKey) {
         model.addAttribute("tripKey", tripKey);
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
