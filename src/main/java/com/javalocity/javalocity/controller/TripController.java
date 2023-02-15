@@ -1,5 +1,6 @@
 package com.javalocity.javalocity.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javalocity.javalocity.bean.Locations;
 import com.javalocity.javalocity.bean.Trip;
 import com.javalocity.javalocity.bean.Trip_Location;
@@ -9,6 +10,7 @@ import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
 import com.javalocity.javalocity.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -63,11 +67,20 @@ public class TripController {
 
         model.addAttribute("location", session.getAttribute("location"));
         Trip trip = (Trip) session.getAttribute("trip");
+        if (trip_locationDao.findTrip_LocationByTrip(trip) != null) {
+            List<Trip_Location> trip_location = (List<Trip_Location>) trip_locationDao.findTrip_LocationByTrip(trip);
+            List<Locations> locations = new ArrayList<>();
+            for (int i = 0; i < trip_location.size(); i++) {
+                locations.add(locationsDao.getReferenceById(trip_location.get(i).getLocations().getId()));
+            }
+            model.addAttribute("train", locations);
+            model.addAttribute("crazy", trip_location);
+        }
 
         model.addAttribute("start", trip.getStartDate());
         model.addAttribute("end", trip.getEndDate());
 
-        return "/trip-details";
+        return "trip-details";
     }
     @PostMapping("/trip/details")
     public String setDetails(@RequestParam("idd") int id, HttpSession session, @RequestParam("start") String start, @RequestParam("end") String end, @RequestParam("begin") String begin) {
@@ -82,10 +95,11 @@ public class TripController {
 
     @GetMapping("/location/viewer")
     public String view(HttpSession session, Model model) {
+
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
-        return "/location-viewer";
+        return "location-viewer";
     }
 
     @PostMapping("/location/viewer")
@@ -112,7 +126,7 @@ public class TripController {
             location.setLocation_idd((int) session.getAttribute("id"));
             location.setEmail(email);
             location.setPhone(phone.get());
-            location.setRating((double) rating.get());
+            location.setRating(rating.get());
             location.setPicture(picture.get());
             locationsDao.save(location);
         }

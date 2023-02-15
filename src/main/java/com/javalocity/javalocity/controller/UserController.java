@@ -75,7 +75,7 @@ public class UserController {
             userDao.save(user);
             return "redirect:/login";
         } else {
-            return "/register";
+            return "register";
         }
 
     }
@@ -87,7 +87,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logoutPage(@ModelAttribute User user) {
-        return "/logout";
+        return "reidirect:/login?logout";
     }
 
     @GetMapping("/profile")
@@ -176,6 +176,8 @@ public class UserController {
         User newUser = new User(oldId, oldUsername, oldEmail, hashNewPassword);
 
         if (passwordEncoder.matches(currentPassword, oldPassword)){
+            User user2 = userDao.getReferenceById(user.getId());
+            newUser.setProfile_img(user2.getProfile_img());
 
             userDao.save(newUser);
             model.addAttribute("PasswordHasBeenUpdated", true);
@@ -190,6 +192,7 @@ public class UserController {
     public String editAccountGet(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
+
         return "accountEdit";
     }
 
@@ -201,7 +204,7 @@ public class UserController {
         String oldUsername = oldUser.getUsername();
         String oldEmail = oldUser.getEmail();
         String oldPassword = oldUser.getPassword();
-
+        System.out.println(oldUser.getProfile_img());
         boolean validEdit = false;
         if (!user.getUsername().equals(oldUser.getUsername()) && userDao.findByUsername(user.getUsername()) != null) {
             model.addAttribute("usernameAlreadyInUse", true);
@@ -224,6 +227,8 @@ public class UserController {
                 String pw = passwordEncoder.encode(user.getPassword());
                 user.setPassword(pw);
             }
+            User user2 = userDao.getReferenceById(oldUser.getId());
+            user.setProfile_img(user2.getProfile_img());
             userDao.save(user);
             return "redirect:/login?logout";
         } else {
@@ -274,6 +279,6 @@ public class UserController {
     }
     @GetMapping("/team")
     public String teamPage() {
-        return "/team";
+        return "team";
     }
 }

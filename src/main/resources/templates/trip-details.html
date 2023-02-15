@@ -29,7 +29,36 @@ Choose Your Trip Details:
                         th:min="${start}" th:max="${end}" required>
     Start Time: <input type="time" name="start" value="" required />
     End Time: <input type="time" name="end" value="" required/>
-<div id="holder"></div>
+<div class="container">
+    <div class="row">
+    <div id="holder" class="col-6"></div>
+    <div class="col-6">
+        <div class="card-columns">
+        <div class="card bg-dark m-2" th:each="it, i : ${crazy}">
+        <div class="card-body m-2">
+            Location:
+            <h3 th:text="${train[i.index].getName()}"></h3>
+            Address:
+            <p th:text="${train[i.index].getAddress_string()}"></p>
+            Date:
+            <p th:text="${it.getStart_date}"></p>
+            Start Time:
+            <p th:text="${it.getStart_time}"></p>
+            End Time:
+            <p th:text="${it.getEnd_time}"></p>
+
+
+            Rating:
+            <p th:text="${train[i.index].getRating()}"></p>
+            Phone:
+            <p th:text="${train[i.index].getPhone()}"></p>
+
+            <a th:href="${train[i.index].getWeb_url()}">Website</a>
+        </div>
+        </div>
+        </div>
+
+    </div></div></div>
 </form>
 
 
