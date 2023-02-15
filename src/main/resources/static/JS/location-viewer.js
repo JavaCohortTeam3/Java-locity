@@ -1,9 +1,10 @@
 let html = ""
+let key = document.getElementById("tripKey").value
 function locationViewer() {
     let hidden = document.getElementById("hidden").value
     const options = {method: 'GET', headers: {accept: 'application/json'}};
     console.log(hidden);
-    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/photos?key=36086683E4694CAFBB45F4197D8AE5D4&language=en`, options)
+    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/photos?key=${key}&language=en`, options)
         .then(response => response.json())
         .then(response => {
             console.log(response);
@@ -26,7 +27,7 @@ function addTitle() {
 
     const options = {method: 'GET', headers: {accept: 'application/json'}};
 
-    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/details?key=36086683E4694CAFBB45F4197D8AE5D4&language=en&currency=USD`, options)
+    fetch(`https://corsanywhere.herokuapp.com/https://api.content.tripadvisor.com/api/v1/location/${hidden}/details?key=${key}&language=en&currency=USD`, options)
         .then(response => response.json())
         .then(response => {
             console.log(response);

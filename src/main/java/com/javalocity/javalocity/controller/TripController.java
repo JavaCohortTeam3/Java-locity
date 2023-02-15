@@ -1,10 +1,12 @@
 package com.javalocity.javalocity.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.javalocity.javalocity.bean.Locations;
 import com.javalocity.javalocity.bean.Trip;
 import com.javalocity.javalocity.bean.Trip_Location;
 import com.javalocity.javalocity.bean.User;
+
 import com.javalocity.javalocity.repository.LocationsRepository;
 import com.javalocity.javalocity.repository.TripRepository;
 import com.javalocity.javalocity.repository.Trip_locationRepository;
@@ -40,7 +42,8 @@ public class TripController {
     }
 
     @GetMapping("/trip/locations")
-    public String findLocale() {
+    public String findLocale(@Value("${mapKey}") String mapKey, Model model) {
+        model.addAttribute("mapKey", mapKey);
         return "trip-location";
     }
     @PostMapping("/trip/locations")
@@ -63,7 +66,9 @@ public class TripController {
 
     }
     @GetMapping("/trip/details")
-    public String getDetails(Model model, HttpSession session) {
+    public String getDetails(Model model, HttpSession session, @Value("${tripKey}") String tripkey) {
+
+        model.addAttribute("map", tripkey);
 
         model.addAttribute("location", session.getAttribute("location"));
         Trip trip = (Trip) session.getAttribute("trip");
@@ -94,8 +99,8 @@ public class TripController {
     }
 
     @GetMapping("/location/viewer")
-    public String view(HttpSession session, Model model) {
-
+    public String view(HttpSession session, Model model, @Value("${tripKey}") String tripKey) {
+        model.addAttribute("tripkey", tripKey);
         model.addAttribute("id", session.getAttribute("id"));
         model.addAttribute("start", session.getAttribute("start"));
         model.addAttribute("end", session.getAttribute("end"));
