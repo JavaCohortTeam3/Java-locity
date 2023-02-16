@@ -73,6 +73,7 @@ public class TripController {
 
         model.addAttribute("location", session.getAttribute("location"));
         Trip trip = (Trip) session.getAttribute("trip");
+
         if (trip_locationDao.findTrip_LocationByTrip(trip) != null) {
             List<Trip_Location> trip_location = (List<Trip_Location>) trip_locationDao.findTrip_LocationByTrip(trip);
             List<Locations> locations = new ArrayList<>();
@@ -179,7 +180,7 @@ session.setAttribute("trip", trip);
     public String viewer(@PathVariable long path, Model model) {
         System.out.println("path = " + path);
         Trip trip = (Trip) tripDao.getReferenceById(path);
-        System.out.println("trip = " + trip);
+
         List<Trip_Location> trip_locations = (List<Trip_Location>) trip_locationDao.findTrip_LocationByTrip(trip);
         List<Locations> locations = new ArrayList<>();
         for (int i = 0; i < trip_locations.size(); i++) {
