@@ -6,6 +6,98 @@ let boolPasswordHasLength = false;
 let boolConfirmPasswordHasLength = false;
 let boolPasswordsMatch = false;
 
+let boolPasswordLengthEightOrGreater;
+let boolPasswordHasUppercase;
+let boolPasswordHasLowercase;
+let boolPasswordHasNumber;
+let boolPasswordHasSpecialCharacter;
+
+let boolPasswordIsValid;
+
+function checkIfPasswordIsValid(){
+    checkPasswordLength();
+    checkPasswordLengthEightOrGreater();
+    checkPasswordHasUppercase();
+    checkPasswordHasLowercase();
+    checkPasswordHasNumber();
+    checkPasswordHasSpecialCharacter();
+    if (boolPasswordLengthEightOrGreater && boolPasswordHasUppercase && boolPasswordHasLowercase && boolPasswordHasNumber && boolPasswordHasSpecialCharacter){
+        boolPasswordIsValid = true;
+    } else {
+        boolPasswordIsValid = false;
+    }
+    checkIfValidRegister();
+}
+
+function checkPasswordLengthEightOrGreater(){
+if (document.getElementById("password").value.length >= 8){
+    document.getElementById("passwordLengthEightOrGreater").style.visibility = "hidden";
+    boolPasswordLengthEightOrGreater = true;
+    } else {
+    document.getElementById("passwordLengthEightOrGreater").style.visibility = "visible";
+    boolPasswordLengthEightOrGreater = false;
+    }
+}
+
+function containsUppercaseChars(str) {
+    return /[A-Z]/.test(str);
+}
+
+function checkPasswordHasUppercase(){
+    if (containsUppercaseChars(document.getElementById("password").value)){
+        document.getElementById("passwordHasUppercase").style.visibility = "hidden";
+        boolPasswordHasUppercase = true;
+    } else {
+        document.getElementById("passwordHasUppercase").style.visibility = "visible";
+        boolPasswordHasUppercase = false;
+    }
+}
+
+function containsLowercaseChars(str) {
+    return /[a-z]/.test(str);
+}
+
+function checkPasswordHasLowercase(){
+    if (containsLowercaseChars(document.getElementById("password").value)){
+        document.getElementById("passwordHasLowercase").style.visibility = "hidden";
+        boolPasswordHasLowercase = true;
+    } else {
+        document.getElementById("passwordHasLowercase").style.visibility = "visible";
+        boolPasswordHasLowercase = false;
+    }
+}
+
+function containsNumbers(str) {
+    return /[0-9]/.test(str);
+}
+
+function checkPasswordHasNumber(){
+    if (containsNumbers(document.getElementById("password").value)){
+        document.getElementById("passwordHasNumber").style.visibility = "hidden";
+        boolPasswordHasNumber = true;
+    } else {
+        document.getElementById("passwordHasNumber").style.visibility = "visible";
+        boolPasswordHasNumber = false;
+    }
+}
+
+
+function containsSpecialChars(str) {
+    const specialChars =
+        /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
+}
+
+function checkPasswordHasSpecialCharacter(){
+    if (containsSpecialChars(document.getElementById("password").value)){
+        document.getElementById("passwordHasSpecialCharacter").style.visibility = "hidden";
+        boolPasswordHasSpecialCharacter = true;
+    } else {
+        document.getElementById("passwordHasSpecialCharacter").style.visibility = "visible";
+        boolPasswordHasSpecialCharacter = false;
+    }
+}
+
 document.getElementById("username").addEventListener("keyup", checkUsernameLength);
 
 function checkUsernameLength(){
@@ -30,7 +122,7 @@ function checkEmailLength(){
     }
 }
 
-document.getElementById("password").addEventListener("keyup", checkPasswordLength);
+document.getElementById("password").addEventListener("keyup", checkIfPasswordIsValid);
 
 function checkPasswordLength(){
     checkIfPasswordsMatch();
@@ -72,7 +164,7 @@ SubmitButton.setAttribute('disabled', true);
 SubmitButton.style.opacity = '.2';
 
 function checkIfValidRegister(){
-    if (boolUsernameHasLength && boolEmailHasLength && boolPasswordHasLength && boolConfirmPasswordHasLength && boolPasswordsMatch){
+    if (boolUsernameHasLength && boolEmailHasLength && boolPasswordHasLength && boolConfirmPasswordHasLength && boolPasswordsMatch && boolPasswordIsValid){
         SubmitButton.removeAttribute('disabled')
         SubmitButton.style.opacity = '1';
     } else {
@@ -85,3 +177,4 @@ checkUsernameLength();
 checkEmailLength();
 checkPasswordLength();
 checkConfirmPasswordLength();
+checkIfPasswordIsValid();

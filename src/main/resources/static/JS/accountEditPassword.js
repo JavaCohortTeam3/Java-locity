@@ -5,6 +5,99 @@ let boolNewPasswordHasLength = false;
 let boolConfirmPasswordHasLength = false;
 let boolPasswordsMatch = false;
 
+
+let boolPasswordLengthEightOrGreater;
+let boolPasswordHasUppercase;
+let boolPasswordHasLowercase;
+let boolPasswordHasNumber;
+let boolPasswordHasSpecialCharacter;
+
+let boolPasswordIsValid;
+
+function checkIfPasswordIsValid(){
+    checkNewPasswordLength();
+    checkPasswordLengthEightOrGreater();
+    checkPasswordHasUppercase();
+    checkPasswordHasLowercase();
+    checkPasswordHasNumber();
+    checkPasswordHasSpecialCharacter();
+    if (boolPasswordLengthEightOrGreater && boolPasswordHasUppercase && boolPasswordHasLowercase && boolPasswordHasNumber && boolPasswordHasSpecialCharacter){
+        boolPasswordIsValid = true;
+    } else {
+        boolPasswordIsValid = false;
+    }
+    checkIfValidRegister();
+}
+
+function checkPasswordLengthEightOrGreater(){
+    if (document.getElementById("newPassword").value.length >= 8){
+        document.getElementById("passwordLengthEightOrGreater").style.visibility = "hidden";
+        boolPasswordLengthEightOrGreater = true;
+    } else {
+        document.getElementById("passwordLengthEightOrGreater").style.visibility = "visible";
+        boolPasswordLengthEightOrGreater = false;
+    }
+}
+
+function containsUppercaseChars(str) {
+    return /[A-Z]/.test(str);
+}
+
+function checkPasswordHasUppercase(){
+    if (containsUppercaseChars(document.getElementById("newPassword").value)){
+        document.getElementById("passwordHasUppercase").style.visibility = "hidden";
+        boolPasswordHasUppercase = true;
+    } else {
+        document.getElementById("passwordHasUppercase").style.visibility = "visible";
+        boolPasswordHasUppercase = false;
+    }
+}
+
+function containsLowercaseChars(str) {
+    return /[a-z]/.test(str);
+}
+
+function checkPasswordHasLowercase(){
+    if (containsLowercaseChars(document.getElementById("newPassword").value)){
+        document.getElementById("passwordHasLowercase").style.visibility = "hidden";
+        boolPasswordHasLowercase = true;
+    } else {
+        document.getElementById("passwordHasLowercase").style.visibility = "visible";
+        boolPasswordHasLowercase = false;
+    }
+}
+
+function containsNumbers(str) {
+    return /[0-9]/.test(str);
+}
+
+function checkPasswordHasNumber(){
+    if (containsNumbers(document.getElementById("newPassword").value)){
+        document.getElementById("passwordHasNumber").style.visibility = "hidden";
+        boolPasswordHasNumber = true;
+    } else {
+        document.getElementById("passwordHasNumber").style.visibility = "visible";
+        boolPasswordHasNumber = false;
+    }
+}
+
+
+function containsSpecialChars(str) {
+    const specialChars =
+        /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
+}
+
+function checkPasswordHasSpecialCharacter(){
+    if (containsSpecialChars(document.getElementById("newPassword").value)){
+        document.getElementById("passwordHasSpecialCharacter").style.visibility = "hidden";
+        boolPasswordHasSpecialCharacter = true;
+    } else {
+        document.getElementById("passwordHasSpecialCharacter").style.visibility = "visible";
+        boolPasswordHasSpecialCharacter = false;
+    }
+}
+
 document.getElementById("currentPassword").addEventListener("keyup", checkCurrentPasswordLength);
 
 function checkCurrentPasswordLength(){
@@ -17,7 +110,7 @@ function checkCurrentPasswordLength(){
     }
 }
 
-document.getElementById("newPassword").addEventListener("keyup", checkNewPasswordLength);
+document.getElementById("newPassword").addEventListener("keyup", checkIfPasswordIsValid);
 
 function checkNewPasswordLength(){
     checkIfPasswordsMatch();
@@ -59,7 +152,7 @@ SubmitButton.setAttribute('disabled', true);
 SubmitButton.style.opacity = '.2';
 
 function checkIfValidRegister(){
-    if (boolCurrentPasswordHasLength && boolNewPasswordHasLength && boolConfirmPasswordHasLength && boolPasswordsMatch){
+    if (boolCurrentPasswordHasLength && boolNewPasswordHasLength && boolConfirmPasswordHasLength && boolPasswordsMatch && boolPasswordIsValid){
         SubmitButton.removeAttribute('disabled')
         SubmitButton.style.opacity = '1';
     } else {
@@ -71,4 +164,4 @@ checkCurrentPasswordLength();
 checkNewPasswordLength();
 checkConfirmPasswordLength();
 checkIfValidRegister();
-
+checkIfPasswordIsValid();
