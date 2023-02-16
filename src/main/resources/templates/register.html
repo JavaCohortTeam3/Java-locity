@@ -17,43 +17,43 @@
 
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control bg-transparent text-warning" id="username" th:field="*{username}"/>
+            <input type="text" class="inputTextChange form-control bg-transparent text-warning" id="username" th:field="*{username}"/>
             <!--Error message if user is trying to register a username that already exists in db-->
             <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use,
                 please enter another username.
             </div>
-            <div class="m-1" id="usernameIsEmpty">Username Is Required</div>
+            <div class="m-1 customTextForRegister" id="usernameIsEmpty">Username Is Required</div>
             <br>
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control bg-transparent text-warning" id="email" th:field="*{email}"/>
+            <input type="email" class="form-control inputTextChange bg-transparent text-warning" id="email" th:field="*{email}"/>
             <!--Error message if user is trying to register an email that already exists in db-->
             <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}"/> is already in use, please enter
                 another email
             </div>
-            <div class="m-1" id="emailIsEmpty">Email Is Required</div>
+            <div class="m-1 customTextForRegister" id="emailIsEmpty">Email Is Required</div>
             <br>
         </div>
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control bg-transparent text-warning" id="password" th:field="*{password}"/>
-            <div class="m-1" id="passwordIsEmpty">Please Enter A Password</div>
-            <div class="m-1" id="passwordLengthEightOrGreater">Password Must Contain At Least 8 Characters</div>
-            <div class="m-1" id="passwordHasUppercase">Password Must Contain At Least One Uppercase Letter</div>
-            <div class="m-1" id="passwordHasLowercase">Password Must Contain At Least One Lowercase Letter</div>
-            <div class="m-1" id="passwordHasNumber">Password Must Contain At Least One Number</div>
-            <div class="m-1" id="passwordHasSpecialCharacter">Password Must Contain At Least One Special Character (!”#$%&'()*+,-./:;<=>?@[\]^_`{|}~ )</div>
+            <input type="password" class="form-control inputTextChange bg-transparent text-warning" id="password" th:field="*{password}"/>
+            <div class="m-1 customTextForRegister" id="passwordIsEmpty">Please Enter A Password</div>
+            <div class="m-1 customTextForRegister" id="passwordLengthEightOrGreater">Password Must Contain At Least 8 Characters</div>
+            <div class="m-1 customTextForRegister" id="passwordHasUppercase">Password Must Contain At Least One Uppercase Letter</div>
+            <div class="m-1 customTextForRegister" id="passwordHasLowercase">Password Must Contain At Least One Lowercase Letter</div>
+            <div class="m-1 customTextForRegister" id="passwordHasNumber">Password Must Contain At Least One Number</div>
+            <div class="m-1 customTextForRegister" id="passwordHasSpecialCharacter">Password Must Contain At Least One Special Character (!”#$%&'()*+,-./:;<=>?@[\]^_`{|}~ )</div>
             <br>
         </div>
 
         <div class="form-group">
             <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" class="form-control bg-transparent text-warning" id="confirmPassword"/>
-            <div class="m-1" id="confirmPasswordIsEmpty">Please Confirm Your Password</div>
-            <div class="m-1" id="passwordsDoNotMatch">Passwords do not match</div>
+            <input type="password" class="form-control inputTextChange bg-transparent text-warning" id="confirmPassword"/>
+            <div class="m-1 customTextForRegister" id="confirmPasswordIsEmpty">Please Confirm Your Password</div>
+            <div class="m-1 customTextForRegister" id="passwordsDoNotMatch">Passwords do not match</div>
             <br>
         </div>
 
