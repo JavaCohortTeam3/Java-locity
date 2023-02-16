@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -172,5 +173,22 @@ session.setAttribute("location", trip.getDescription());
 session.setAttribute("trip", trip);
 
         return "redirect:/trip/details";
+    }
+
+    @GetMapping("/viewed/{path}")
+    public String viewer(@PathVariable long path, Model model) {
+        System.out.println("path = " + path);
+        Trip trip = (Trip) tripDao.getReferenceById(path);
+        System.out.println("trip = " + trip);
+        List<Trip_Location> trip_locations = (List<Trip_Location>) trip_locationDao.findTrip_LocationByTrip(trip);
+        List<Locations> locations = new ArrayList<>();
+        for (int i = 0; i < trip_locations.size(); i++) {
+            locations.add(locationsDao.getReferenceById(trip_locations.get(i).getLocations().getId()));
+        }
+
+        System.out.println("locations = " + locations);
+        model.addAttribute("locations", locations);
+        return "viewed";
+
     }
 }
