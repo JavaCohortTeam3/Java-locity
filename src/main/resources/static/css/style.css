@@ -13,12 +13,14 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
 .card-img {
     width: 100%;
     height: 400px;
     object-fit: cover;
 }
-.logo{
+
+.logo {
     width: 30px;
     height: 30px;
     object-fit: cover;
@@ -37,17 +39,18 @@ body {
 
 H1 {
     color: #d9b310;
-    text-shadow : 2px 2px 2px #1d2731;
+    text-shadow: 2px 2px 2px #1d2731;
 }
 
 h2 {
     color: #328cc1;
-    text-shadow : 2px 2px 2px #1d2731;
+    text-shadow: 2px 2px 2px #1d2731;
     font-family: steel;
 }
+
 h3 {
     color: #328cc1;
-    text-shadow : 2px 2px 2px #1d2731;
+    text-shadow: 2px 2px 2px #1d2731;
     font-family: steel;
 }
 
@@ -56,44 +59,45 @@ p {
 
 }
 
-.tripLocationLabel{
+.tripLocationLabel {
     margin-right: 10px;
 }
 
-.tripLocationInput{
+.tripLocationInput {
     margin-right: 100px;
 }
-.formFinalizeTrip{
-display: flex;
+
+.formFinalizeTrip {
+    display: flex;
     justify-content: center;
     align-content: center;
 }
 
-.buttonFinalizeTrip{
+.buttonFinalizeTrip {
     margin: 5px;
 }
 
-.tripDetailsSelect{
-margin-left: 15px;
+.tripDetailsSelect {
+    margin-left: 15px;
 }
 
-.tripDetailsInput{
+.tripDetailsInput {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.pTripDetails{
+.pTripDetails {
     font-size: larger;
 }
 
-.chooseTripDiv{
+.chooseTripDiv {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.chooseTripDateDiv{
+.chooseTripDateDiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +107,7 @@ margin-left: 15px;
     width: 75%;
 }
 
-.tripDetailsForm{
+.tripDetailsForm {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,11 +115,11 @@ margin-left: 15px;
     flex-wrap: wrap;
 }
 
-.pLocationViewer{
+.pLocationViewer {
     font-size: larger;
 }
 
-.formLocationViewer{
+.formLocationViewer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,7 +130,7 @@ margin-left: 15px;
     padding-bottom: 10px;
 }
 
-.saveLocationViewer{
+.saveLocationViewer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,28 +138,28 @@ margin-left: 15px;
     flex-direction: column;
 }
 
-.titleLocationViewer{
+.titleLocationViewer {
     background-color: #1d2731;
     padding-left: 10px;
 }
 
-.divLocationViewer{
+.divLocationViewer {
 }
 
-.picturesLocationViewer{
+.picturesLocationViewer {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 
 }
 
-.imgLocationViewer{
+.imgLocationViewer {
     margin-bottom: 10px;
     border: 5px solid #1d2731;
     margin-top: 10px;
 }
 
-.divProfile{
+.divProfile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -163,48 +167,49 @@ margin-left: 15px;
     margin-top: 3em;
 }
 
-.divTripCardsProfile{
+.divTripCardsProfile {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.divCardEachProfile{
+.divCardEachProfile {
     margin: 20px;
     width: 45%;
 }
 
-.crudCardProfile{
+.crudCardProfile {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.crudFormProfile{
+.crudFormProfile {
     margin: 5px;
 }
 
-.divCardBody{
+.divCardBody {
     font-size: large;
 }
 
-.headerTripView{
+.headerTripView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3em;
+}
+
+.divViewTrip {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.divViewTrip{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.divCardEachView{
+.divCardEachView {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -212,27 +217,41 @@ margin-left: 15px;
     width: 65%;
 }
 
-.divCardBodyView{
+.divCardBodyView {
     display: flex;
     /*align-items: center;*/
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.insideDivCardBody{
-    margin-left: 10px;
-    margin-right: 10px;
+.insideDivCardBody {
+    /*margin-left: 10px;*/
+    /*margin-right: 10px;*/
+    margin-right: 7em;
 }
 
-.divCardBodyView2{
+.divCardBodyView2 {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
-.divCardEachView3{
+.divDeleteLocation {
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    font-size: large;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.pViewTrip{
+    font-size: x-large;
+}
+
+.inputTextChange{
+    font-family: Serif;
+}
+
+.customTextForRegister{
+    color: #adb5bd;
 }
