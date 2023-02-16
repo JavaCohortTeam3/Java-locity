@@ -8,19 +8,21 @@
     <div th:insert="~{partials :: header}"></div>
     <div th:replace="~{partials :: css}"></div>
 </head>
-<body class="container-fluid">
+<body>
 <nav th:insert="~{partials :: navbar}"></nav>
 <div class="container">
 
     <h1 class="d-flex justify-content-center mt-3">User Registration Form</h1>
-    <form th:action="@{/register}" th:object="${user}" method="post">
+    <form class="m-2" th:action="@{/register}" th:object="${user}" method="post">
 
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" class="form-control bg-transparent text-warning" id="username" th:field="*{username}"/>
             <!--Error message if user is trying to register a username that already exists in db-->
-            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use, please enter another username.</div>
-            <div id="usernameIsEmpty">Username Is Required</div>
+            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use,
+                please enter another username.
+            </div>
+            <div class="m-1" id="usernameIsEmpty">Username Is Required</div>
             <br>
         </div>
 
@@ -28,23 +30,26 @@
             <label for="email">Email:</label>
             <input type="email" class="form-control bg-transparent text-warning" id="email" th:field="*{email}"/>
             <!--Error message if user is trying to register an email that already exists in db-->
-            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}" />  is already in use, please enter another email</div>
-            <div id="emailIsEmpty">Email Is Required</div>
+            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}"/> is already in use, please enter
+                another email
+            </div>
+            <div class="m-1" id="emailIsEmpty">Email Is Required</div>
             <br>
         </div>
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control bg-transparent text-warning" id="password" th:field="*{password}"/>
-            <div id="passwordIsEmpty">Please Enter A Password</div>
+            <input type="password" class="form-control bg-transparent text-warning" id="password"
+                   th:field="*{password}"/>
+            <div class="m-1" id="passwordIsEmpty">Please Enter A Password</div>
             <br>
         </div>
 
         <div class="form-group">
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" class="form-control bg-transparent text-warning" id="confirmPassword"/>
-            <div id="confirmPasswordIsEmpty">Please Confirm Your Password</div>
-            <div id="passwordsDoNotMatch">Passwords do not match</div>
+            <div class="m-1" id="confirmPasswordIsEmpty">Please Confirm Your Password</div>
+            <div class="m-1" id="passwordsDoNotMatch">Passwords do not match</div>
             <br>
         </div>
 
@@ -53,12 +58,13 @@
     </form>
 </div>
 <div class="container">
-    <div class="card shadow mt-3">
-        <img th:src="@{images/pyramid.jpg}" class="card-img" alt="bamboo forest">
-        <div class="card-img-overlay">
+    <div class="card bg-dark m-2">
+        <div class="card-text">
             <h1 class="d-flex justify-content-center align-items-center">Visit the pyramid</h1>
             <h1 class="d-flex justify-content-center align-items-center">complex of Giza Eygpt</h1>
         </div>
+        <img th:src="@{images/pyramid.jpg}" class="card-img " alt="bamboo forest">
+
     </div>
 </div>
 

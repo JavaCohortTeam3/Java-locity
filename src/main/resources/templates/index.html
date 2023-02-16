@@ -20,12 +20,16 @@
         </div>
     </div>
 </div>
-<div class="card bg-dark m-3">
-    <div class="card-body text-center px-4 py-5 px-md-5">
-        <p class="fw-bold text-info card-text mb-2 fs-1">Welcome to Java-locity!</p>
-        <h5 class="fw-bold card-title mb-1">A unique itinerary planner designed to help you explore the world with ease.
-            With our system you can easily plan the dates and times of you trip down to the minute with one convenient
-            place to store the itinerary.</h5>
+<div class="container">
+    <div class="card bg-dark m-3">
+        <div class="card-body text-center m-2">
+            <p class="fw-bold text-info card-text mb-2 fs-1">Welcome to Java-locity!</p>
+            <h5 class="fw-bold card-title mb-1">A unique itinerary planner designed to help you explore the world with
+                ease.</h5>
+            <h5 class="fw-bold card-title mb-1">
+                With our system you can easily plan the dates and times of you trip down to the minute</h5> <h5
+                class="fw-bold card-title mb-1"> with one convenient place to store the itinerary.</h5>
+        </div>
     </div>
 </div>
 <section>
@@ -36,38 +40,47 @@
                 <div class="row row-cols-1 row-cols-md-2 d-flex justify-content-center">
                     <div class="col mb-4">
                         <div class="card bg-dark">
-                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/yellowstone-national.jpeg}" class="card-img" alt="yellowstone">
-                            <div class="card-img-overlay">
-                                <h1 class="d-flex justify-content-center">Visit Yellowstone</h1>
-                                <h1 class="d-flex justify-content-center">National park</h1>
-                            </div></a>
+                            <a class="nav-link" th:href="@{/viewed/14}"><img
+                                    th:src="@{images/yellowstone-national.jpeg}" class="card-img" alt="yellowstone">
+                                <div class="card-img-overlay">
+                                    <h1 class="d-flex justify-content-center">Visit Yellowstone</h1>
+                                    <h1 class="d-flex justify-content-center">National park</h1>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col mb-4">
                         <div class="card bg-dark">
-                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/maui hawaii.jpeg}" class="card-img" alt="hawaii">
-                            <div class="card-img-overlay">
-                                <h1 class="d-flex justify-content-center">Explore Maui</h1>
-                                <h1 class="d-flex justify-content-center">Hawaii</h1>
-                            </div></a>
+                            <a class="nav-link" th:href="@{/viewed/15}"><img th:src="@{images/maui hawaii.jpeg}"
+                                                                                  class="card-img" alt="hawaii">
+                                <div class="card-img-overlay">
+                                    <h1 class="d-flex justify-content-center">Explore Maui</h1>
+                                    <h1 class="d-flex justify-content-center">Hawaii</h1>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col mb-4">
                         <div class="card bg-dark">
-                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/orlando florida.jpeg}" class="card-img" alt="Florida">
-                            <div class="card-img-overlay">
-                                <h1 class="d-flex justify-content-center">Say Hello To</h1>
-                                <h1 class="d-flex justify-content-center">Orlando Florida</h1>
-                            </div></a>
+                            <a class="nav-link" th:href="@{/viewed/17}"><img
+                                    th:src="@{images/orlando florida.jpeg}" class="card-img" alt="Florida">
+                                <div class="card-img-overlay">
+                                    <h1 class="d-flex justify-content-center">Say Hello To</h1>
+                                    <h1 class="d-flex justify-content-center">Orlando Florida</h1>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col mb-4">
                         <div class="card bg-dark">
-                            <a class="nav-link" th:href="@{/trip/locations}"><img th:src="@{images/puntaCana.jpeg}" class="card-img" alt="Dominican republic">
-                            <div class="card-img-overlay">
-                                <h1 class="d-flex justify-content-center">Jump Into</h1>
-                                <h1 class="d-flex justify-content-center">Punta Cana</h1>
-                            </div></a>
+                            <a class="nav-link" th:href="@{/viewed/16}"><img th:src="@{images/puntaCana.jpeg}"
+                                                                                  class="card-img"
+                                                                                  alt="Dominican republic">
+                                <div class="card-img-overlay">
+                                    <h1 class="d-flex justify-content-center">Jump Into</h1>
+                                    <h1 class="d-flex justify-content-center">Punta Cana</h1>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -83,16 +96,23 @@
             <ul class="navbar-nav">
                 <li class="nav-item fs-3"><p>Visit our social media</p></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.instagram.com/java.locity.travel/"><img class="logo" th:src="@{images/instagram.png}" alt="instagram"></a>
+                    <a class="nav-link" href="https://www.instagram.com/java.locity.travel/"><img class="logo"
+                                                                                                  th:src="@{images/instagram.png}"
+                                                                                                  alt="instagram"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.facebook.com/profile.php?id=100090400539754"><img class="logo" th:src="@{images/facebookLogo.png}" alt="facebook"></a>
+                    <a class="nav-link" href="https://www.facebook.com/profile.php?id=100090400539754"><img class="logo"
+                                                                                                            th:src="@{images/facebookLogo.png}"
+                                                                                                            alt="facebook"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://twitter.com/java_locity"><img class="logo" th:src="@{images/twitter.png}" alt="twitter"></a>
+                    <a class="nav-link" href="https://twitter.com/java_locity"><img class="logo"
+                                                                                    th:src="@{images/twitter.png}"
+                                                                                    alt="twitter"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="https://github.com/JavaCohortTeam3/Java-locity"><img class="logo" th:src="@{images/GitHub.png}" alt="Github"></a>
+                    <a class="nav-link text-dark" href="https://github.com/JavaCohortTeam3/Java-locity"><img
+                            class="logo" th:src="@{images/GitHub.png}" alt="Github"></a>
                 </li>
             </ul>
         </div>
