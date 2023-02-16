@@ -20,12 +20,12 @@
 		<div class="card divCardEachProfile bg-dark" th:each="search : ${trip}">
 			<div class="card-body divCardBody">
 				
+				Locale:
+				<p th:text="${search.getName()}"></p>
 				Start Date:
 				<p th:text="${search.getStartDate()}"></p>
 				End Date:
 				<p th:text="${search.getEndDate()}"></p>
-				Locale:
-				<p th:text="${search.getName()}"></p>
 				
 				<div class="crudCardProfile">
 					<form class="crudFormProfile" th:action="@{/profile}" th:method="post">

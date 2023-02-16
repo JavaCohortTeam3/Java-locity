@@ -162,3 +162,50 @@ margin-left: 15px;
 .divCardBody{
     font-size: large;
 }
+
+.headerTripView{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divViewTrip{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divCardEachView{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 65%;
+}
+
+.divCardBodyView{
+    display: flex;
+    /*align-items: center;*/
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.insideDivCardBody{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.divCardBodyView2{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.divCardEachView3{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-size: large;
+}
