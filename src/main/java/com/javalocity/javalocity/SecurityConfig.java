@@ -46,11 +46,11 @@ public class SecurityConfig {
 
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/", "/font/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/profile", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -60,7 +60,7 @@ public class SecurityConfig {
 
 
 
-                .requestMatchers("/login", "/register", "/","/team", "/css/**","/error","/images/**", "/JS/register.js")
+                .requestMatchers("/login", "/register", "/","/team", "/css/**","/error","/images/**", "/JS/register.js", "font/**")
 
                 .permitAll()
                 .and()
