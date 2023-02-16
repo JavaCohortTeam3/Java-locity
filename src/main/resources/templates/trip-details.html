@@ -12,26 +12,29 @@
 <p class="d-flex justify-content-center mt-3">Here you can choose the details of your itinerary and add different aspects like choosing a hotel or adding an attraction you would like to visit.</p>
 <p class="d-flex justify-content-center mt-3">Start by setting the date and times for the action then click the dropdown to choose an option. Click the Finalize Trip button to lock in the itinerary. </p>
 <input type="hidden" th:value="${location}" id="hidden">
-<form class="m-2" th:action="@{/trip/view}">
-    <button class="btn btn-info ms-3" type="submit">Finalize Trip</button>
-</form>
-<div class="m-2">
+
+<div class="m-2 chooseTripDiv">
 Choose Your Trip Details:
-<select  name="details" id="details">
+<select class="tripDetailsSelect" name="details" id="details">
     <option value=""></option>
     <option value="restaurants">Restaurants</option>
     <option value="hotels">Hotels</option>
     <option value="attractions">Attractions</option>
 </select>
+	<form class="m-2 formFinalizeTrip" th:action="@{/trip/view}">
+		<button class="btn btn-info buttonFinalizeTrip ms-3" type="submit">Finalize Trip</button>
+	</form>
     <input type="hidden" th:value="${map}" id="mapkey">
 </div>
-<form class="m-2" th:action="@{/trip/details}" th:method="post">
-    Date:  <input class type="date" name="begin"
+
+
+<form class="m-2 tripDetailsForm" th:action="@{/trip/details}" th:method="post">
+    Date:  <input class="tripDetailsInput" type="date" name="begin"
                         placeholder="dd-mm-yyyy" value=""
                         th:min="${start}" th:max="${end}" required>
-    Start Time: <input type="time" name="start" value="" required />
-    End Time: <input type="time" name="end" value="" required/>
-<div class="container">
+    Start Time: <input class="tripDetailsInput" type="time" name="start" value="" required />
+    End Time: <input class="tripDetailsInput" type="time" name="end" value="" required/>
+<div class="container mt-3">
     <div class="row">
     <div id="holder" class="col-6"></div>
     <div class="col-6">

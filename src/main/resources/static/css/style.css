@@ -23,6 +23,7 @@ body {
     background-color: #0b3c5d;
     color: #d9b310;
     font-family: Serif;
+    font-size: large;
 }
 
 H1 {
@@ -73,6 +74,13 @@ margin-left: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+.chooseTripDateDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardDivLocationBtn {
@@ -84,6 +92,7 @@ margin-left: 15px;
     justify-content: center;
     align-items: center;
     margin-bottom: 1em;
+    flex-wrap: wrap;
 }
 
 .pLocationViewer{
