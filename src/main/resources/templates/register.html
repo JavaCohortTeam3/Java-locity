@@ -39,9 +39,13 @@
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control bg-transparent text-warning" id="password"
-                   th:field="*{password}"/>
+            <input type="password" class="form-control bg-transparent text-warning" id="password" th:field="*{password}"/>
             <div class="m-1" id="passwordIsEmpty">Please Enter A Password</div>
+            <div class="m-1" id="passwordLengthEightOrGreater">Password Must Contain At Least 8 Characters</div>
+            <div class="m-1" id="passwordHasUppercase">Password Must Contain At Least One Uppercase Letter</div>
+            <div class="m-1" id="passwordHasLowercase">Password Must Contain At Least One Lowercase Letter</div>
+            <div class="m-1" id="passwordHasNumber">Password Must Contain At Least One Number</div>
+            <div class="m-1" id="passwordHasSpecialCharacter">Password Must Contain At Least One Special Character (!”#$%&'()*+,-./:;<=>?@[\]^_`{|}~ )</div>
             <br>
         </div>
 
