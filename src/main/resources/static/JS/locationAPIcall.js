@@ -45,7 +45,8 @@ submit.addEventListener("click", function (e) {
         document.getElementById("title").value = input[0].value
         console.log(document.getElementById("location").value);
         if (input[0].value != undefined){
-            document.getElementsByTagName("form")[1].submit()
+
+            document.getElementsByTagName("form")[0].submit()
         }
     })
 })
