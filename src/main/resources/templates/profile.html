@@ -2,53 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8">
-	<title>My Profile</title>
-	<div th:insert="~{partials :: header}"></div>
-	<div th:insert="~{partials :: css}"></div>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo.png}">
+    <div th:insert="~{partials :: header}"></div>
+    <div th:insert="~{partials :: css}"></div>
 </head>
 <body/>
 <nav th:insert="~{partials :: navbar}"></nav>
 
-<div class="container mt-5 d-flex justify-content-center divProfile">
-	<h1>Welcome <span th:text="${#authentication.principal.username}"/>!</h1>
-	<!--    <div class="">-->
-	<!--        <div class="">-->
-	<h3 class="text-warning mb-3">Previous Planned Trips:</h3>
-	<h5 class="text-warning mb-3">This is a list of the trips you have planned!</h5>
-	<div class="divTripCardsProfile">
-		<div class="card divCardEachProfile bg-dark" th:each="search : ${trip}">
-			<div class="card-body divCardBody">
-				
-				Locale:
-				<p th:text="${search.getName()}"></p>
-				Start Date:
-				<p th:text="${search.getStartDate()}"></p>
-				End Date:
-				<p th:text="${search.getEndDate()}"></p>
-				
-				<div class="crudCardProfile">
-					<form class="crudFormProfile" th:action="@{/profile}" th:method="post">
-						<button type="submit" name="id" th:value="${search.getId()}" class="btn btn-info mt-2">View
-							Trip
-						</button>
-					</form>
-					<form class="crudFormProfile" th:action="@{/trip/add}" th:method="post">
-						<button type="submit" name="addToTrip" th:value="${search.getId}" class="btn btn-info mt-2">Add
-							to Trip
-						</button>
-					</form>
-					<form class="crudFormProfile" th:action="@{/trip/delete}" th:method="post">
-						<button type="submit" name="idd" th:value="${search.getId()}" class="btn btn-info mt-2">Delete
-							Trip
-						</button>
-					</form>
-				</div>
-			</div>
-			<!--                </div>-->
-			<!--            </div>-->
-		</div>
-	</div>
+<div class="container mt-5">
+    <h1>Welcome <span th:text="${#authentication.principal.username}"/>!</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="text-warning mb-3">Previous Planned Trips:</h3>
+            <h5 class="text-warning mb-3">This is a list of the trips you have planned!</h5>
+            <div class="card-columns">
+                <div class="card bg-dark" th:each="search : ${trip}">
+                    <div class="card-body">
+
+                        Start Date:
+                        <p th:text="${search.getStartDate()}"></p>
+                        End Date:
+                        <p th:text="${search.getEndDate()}"></p>
+                        Locale:
+                        <p th:text="${search.getName()}"></p>
+                        <form th:action="@{/profile}" th:method="post">
+                            <button type="submit" name="id" th:value="${search.getId()}" class="btn btn-info mt-2">View Trip</button>
+                        </form>
+                        <form th:action="@{/trip/delete}" th:method="post"  onsubmit="return confirm('Are you sure you want to delete?');">
+                            <button type="submit" name="idd" th:value="${search.getId()}" class="btn btn-info mt-2">Delete Trip</button>
+                        </form>
+	                    <form th:action="@{/trip/add}" th:method="post">
+		                    <button type="submit" name="addToTrip" th:value="${search.getId}" class="btn btn-info mt-2">Add to Trip</button>
+	                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

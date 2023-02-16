@@ -2,60 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Planned Trip</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/images/logo.png}">
 	<div th:insert="~{partials :: header}"></div>
 	<div th:replace="~{partials :: css}"></div>
 </head>
 <body>
 	<nav th:insert="~{partials :: navbar}"></nav>
-	<div class="divViewTrip">
-		<div class="headerTripView">
-			<h1 class="d-flex justify-content-center text-warning mb-3">Previous Planned Trips:</h1>
+	<div class="col-md-6">
+		<h1 class="d-flex justify-content-center text-warning mb-3">Previous Planned Trips:</h1>
+
+		<p class="d-flex justify-content-center text-warning m-3">This is the detailed plan for your chosen trip!Here you can view all aspects of your chosen itinerary, and remove aspects from the itinerary</p>
+
+		<h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen trip!</h5>
+
+
+		<div class="card-columns">
 			
-			<p class="d-flex justify-content-center text-warning m-3">This is the detailed plan for your chosen
-				trip!Here you can view all aspects of your chosen itinerary, and remove aspects from the itinerary</p>
-			
-			<h5 class="d-flex justify-content-center text-warning mb-3">This is the detailed plan for your chosen
-				trip!</h5>
-		</div>
-		
-		<div class="divCardEachView">
-			<div class="card bg-dark m-2 divCardEachView3" th:each="locations, i : ${locations}">
+			<div class="card bg-dark m-2" th:each="locations, i : ${locations}">
 				
-				<div class="card-body m-2 divCardBodyView2">
-					<div>
-						Location:
-						<p class="insideDivCardBody" th:text="${locations.getName()}"></p>
-						Address:
-						<p class="insideDivCardBody" th:text="${locations.getAddress_string()}"></p>
-						Rating:
-						<p class="insideDivCardBody" th:text="${locations.getRating()}"></p>
-						Phone:
-						<p class="insideDivCardBody" th:text="${locations.getPhone()}"></p>
-					
-					</div>
-					<div>
-						Date:
-						<p class="insideDivCardBody" th:text="${trips[i.index].getStart_date}"></p>
-						Start Time:
-						<p class="insideDivCardBody" th:text="${trips[i.index].getStart_time}"></p>
-						End Time:
-						<p class="insideDivCardBody" th:text="${trips[i.index].getEnd_time}"></p>
-						<a class="insideDivCardBody" th:href="${locations.getWeb_url()}">Website</a>
-					</div>
-					
-					
+				<div class="card-body m-2">
+					Date:
+					<p th:text="${trips[i.index].getStart_date}"></p>
+					Location:
+					<h3 th:text="${locations.getName()}"></h3>
+					Address:
+					<p th:text="${locations.getAddress_string()}"></p>
+					Start Time:
+					<p th:text="${trips[i.index].getStart_time}"></p>
+					End Time:
+					<p th:text="${trips[i.index].getEnd_time}"></p>
+					<span th:if="${locations.getRating() != 0}">
+					Rating:
+					<p th:text="${locations.getRating()}"></p>
+					</span>
+					<span th:unless="${locations.getRating() != 0}"></span>
+					<span th:if="${locations.getPhone() != null}">
+					Phone:
+					<p th:text="${locations.getPhone()}"></p>
+					</span>
+					<span th:unless="${locations.getPhone() != null}"></span>
+					<span th:if="${locations.getWeb_url() != null}">
+					<a th:href="${locations.getWeb_url()}">Website</a>
+					</span>
+					<span th:unless="${locations.getWeb_url() != null}"></span>
+					<span th:if="${!locations.getPicture.equals('')}">
 					<img th:src="${locations.getPicture}" class="card-img" alt="">
-					
-					<form th:action="@{/view}" th:method="post">
-						<button type="submit" name="locationId" th:value="${trips[i.index].getId}"
-						        class="btn btn-info mt-2">Remove location
-						</button>
+					</span>
+					<span th:unless="${!locations.getPicture().equals('')}"></span>
+					<form th:action="@{/view}" th:method="post" onsubmit="return confirm('Are you sure you want to remove?');">
+						<button type="submit" name="locationId" th:value="${trips[i.index].getId}" class="btn btn-info mt-2">Remove location</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<footer th:replace="~{partials :: footer}"></footer>
+		
+		<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
 

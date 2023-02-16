@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<title>Trip Details</title>
-	<div th:insert="~{partials :: header}"></div>
-	<div th:replace="~{partials :: css}"></div>
+    <title>Trip Details</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/logo.png}">
+    <div th:insert="~{partials :: header}"></div>
+    <div th:replace="~{partials :: css}"></div>
 </head>
 <body>
-	<nav th:insert="~{partials :: navbar}"></nav>
-	<h1 class="d-flex justify-content-center mt-3">Trip Details Selection</h1>
-	<p class="d-flex justify-content-center mt-3 pTripDetails">Here you can choose the details of your itinerary and add different
-		aspects like choosing a hotel or adding an attraction you would like to visit.</p>
-	<p class="d-flex justify-content-center mt-3 pTripDetails">Start by setting the date and times for the action then click the
-		dropdown to choose an option. Click the Finalize Trip button to lock in the itinerary. </p>
-	<br>
-	<input type="hidden" th:value="${location}" id="hidden">
-	
-	<div class="m-3 chooseTripDiv">
-		Choose Your Trip Details:
-		<select class="tripDetailsSelect" name="details" id="details">
-			<option value=""></option>
-			<option value="restaurants">Restaurants</option>
-			<option value="hotels">Hotels</option>
-			<option value="attractions">Attractions</option>
-		</select>
-		<input type="hidden" th:value="${map}" id="mapkey">
-		<form class="m-3 formFinalizeTrip" th:action="@{/trip/view}">
-			<button class="btn btn-info  buttonFinalizeTrip" type="submit">Finalize Trip</button>
-		</form>
-	</div>
-	<form class="m-3" th:action="@{/trip/details}" th:method="post">
-		<div class="tripDetailsForm">
-		Date: <input class="tripDetailsInput" type="date" name="begin"
-		             placeholder="dd-mm-yyyy" value=""
-		             th:min="${start}" th:max="${end}" required>
-		Start Time: <input class="tripDetailsInput" type="time" name="start" value="" required/>
-		End Time: <input class="tripDetailsInput" type="time" name="end" value="" required/>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div id="holder" class="col-6"></div>
-				<div class="col-6">
-					<div class="card-columns">
-						<div class="card bg-dark cardDivLocation m-2" th:each="it, i : ${crazy}">
-							<div class="card-body m-2">
-								Location:
-								<h3 th:text="${train[i.index].getName()}"></h3>
-								Address:
-								<p th:text="${train[i.index].getAddress_string()}"></p>
-								Date:
-								<p th:text="${it.getStart_date}"></p>
-								Start Time:
-								<p th:text="${it.getStart_time}"></p>
-								End Time:
-								<p th:text="${it.getEnd_time}"></p>
-								
-								
-								Rating:
-								<p th:text="${train[i.index].getRating()}"></p>
-								Phone:
-								<p th:text="${train[i.index].getPhone()}"></p>
-								
-								<a th:href="${train[i.index].getWeb_url()}">Website</a>
-							</div>
-						</div>
-					</div>
-				
-				</div>
-			</div>
-		</div>
-	</form>
-	
-	<footer th:replace="~{partials :: footer}"></footer>
+<nav th:insert="~{partials :: navbar}"></nav>
+<h1 class="d-flex justify-content-center mt-3">Trip Details Selection</h1>
+<p class="d-flex justify-content-center mt-3">Here you can choose the details of your itinerary and add different aspects like choosing a hotel or adding an attraction you would like to visit.</p>
+<p class="d-flex justify-content-center mt-3">Start by setting the date and times for the action then click the dropdown to choose an option. Click the Finalize Trip button to lock in the itinerary. </p>
+<input type="hidden" th:value="${location}" id="hidden">
+<form class="m-2" th:action="@{/trip/view}">
+    <button class="btn btn-info ms-3" type="submit">Finalize Trip</button>
+</form>
+<div class="m-2">
+Choose Your Trip Details:
+<select  name="details" id="details">
+    <option value=""></option>
+    <option value="restaurants">Restaurants</option>
+    <option value="hotels">Hotels</option>
+    <option value="attractions">Attractions</option>
+</select>
+    <input type="hidden" th:value="${map}" id="mapkey">
+</div>
+<form class="m-2" th:action="@{/trip/details}" th:method="post">
+    Date:  <input class type="date" name="begin"
+                        placeholder="dd-mm-yyyy" value=""
+                        th:min="${start}" th:max="${end}" required>
+    Start Time: <input type="time" name="start" value="" required />
+    End Time: <input type="time" name="end" value="" required/>
+<div class="container">
+    <div class="row">
+    <div id="holder" class="col-6"></div>
+    <div class="col-6">
+        <div class="card-columns">
+        <div class="card bg-dark m-2" th:each="it, i : ${crazy}">
+        <div class="card-body m-2">
+            Location:
+            <h3 th:text="${train[i.index].getName()}"></h3>
+            Address:
+            <p th:text="${train[i.index].getAddress_string()}"></p>
+            Date:
+            <p th:text="${it.getStart_date}"></p>
+            Start Time:
+            <p th:text="${it.getStart_time}"></p>
+            End Time:
+            <p th:text="${it.getEnd_time}"></p>
+
+            <span th:if="${train[i.index].getRating() != 0}">
+					Rating:
+					<p th:text="${train[i.index].getRating()}"></p>
+            </span>
+            <span th:unless="${train[i.index].getRating() != 0}"></span>
+            <span th:if="${train[i.index].getPhone() != null}">
+					Phone:
+					<p th:text="${train[i.index].getPhone()}"></p>
+            </span>
+            <span th:unless="${train[i.index].getPhone() != null}"></span>
+            <span th:if="${train[i.index].getWeb_url() != null}">
+					<a th:href="${train[i.index].getWeb_url()}">Website</a>
+            </span>
+            <span th:unless="${train[i.index].getWeb_url() != null}"></span>
+
+        </div>
+        </div>
+        </div>
+
+    </div></div></div>
+</form>
+
+
+<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
 
@@ -80,14 +82,14 @@
         crossorigin="anonymous"></script>
 
 <script th:inline="javascript" type="text/javascript" th:src="@{/JS/locationDetails.js}">
-	
-	/*<![CDATA[*/
-	
-	
-	// let key2 = /*[[${map}]]*/;
-	
-	
-	/*]]>*/
+
+    /*<![CDATA[*/
+
+
+    // let key2 = /*[[${map}]]*/;
+
+
+    /*]]>*/
 
 </script>
 
