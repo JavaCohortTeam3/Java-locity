@@ -1,3 +1,8 @@
+@font-face {
+    font-family: steel;
+    src: url("../font/american_captain/American Captain.ttf");
+}
+
 * {
     box-sizing: border-box;
 }
@@ -22,7 +27,7 @@
 body {
     background-color: #0b3c5d;
     color: #d9b310;
-    font-family: Serif;
+    font-family: steel;
 }
 
 H1 {
@@ -33,9 +38,16 @@ H1 {
 h2 {
     color: #328cc1;
     text-shadow : 2px 2px 2px #1d2731;
+    font-family: steel;
 }
 h3 {
     color: #328cc1;
     text-shadow : 2px 2px 2px #1d2731;
+    font-family: steel;
+}
+
+p {
+    font-family: steel;
+
 }
 
