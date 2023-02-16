@@ -108,33 +108,35 @@ public class TripController {
     }
 
     @PostMapping("/location/viewer")
-    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") Optional<String> web_url, @RequestParam("address_string") Optional<String> address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") String email, @RequestParam("phone") Optional<String> phone, @RequestParam("rating")Optional<Double> rating, @RequestParam("picture") Optional<String> picture) {
+    public String viewLoc(HttpSession session, Model model, @RequestParam("name") String name, @RequestParam("web_url") Optional<String> web_url, @RequestParam("address_string") Optional<String> address_string, @RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, @RequestParam("email") Optional<String> email, @RequestParam("phone") Optional<String> phone, @RequestParam("rating")Optional<String> rating, @RequestParam("picture") Optional<String> picture) {
         Locations location = new Locations();
-        if (phone.isEmpty() || web_url.isEmpty() || rating.isEmpty() || picture.isEmpty()) {
-            location.setName(name);
-
-            location.setAddress_string(address_string.get());
-            location.setLatitude(latitude);
-            location.setLongitude(longitude);
-            location.setLocation_idd((int) session.getAttribute("id"));
-            location.setEmail(email);
-
-
-            locationsDao.save(location);
-        } else {
-
-            location.setName(name);
-            location.setWeb_url(web_url.get());
-            location.setAddress_string(address_string.get());
-            location.setLatitude(latitude);
-            location.setLongitude(longitude);
-            location.setLocation_idd((int) session.getAttribute("id"));
-            location.setEmail(email);
-            location.setPhone(phone.get());
-            location.setRating(rating.get());
-            location.setPicture(picture.get());
-            locationsDao.save(location);
+        System.out.println("rating.get() = " + rating.get());;
+        System.out.println("picture.get() = " + picture.get());
+        if (!rating.get().equals("undefined")) {
+            location.setRating(Double.parseDouble(rating.get()));
         }
+        if (!picture.get().equals("undefined") || !picture.get().equals("")) {
+            location.setPicture(picture.get());
+        }
+        if (!email.get().equals("undefined")) {
+            location.setEmail(email.get());
+        }
+        if (!phone.get().equals("undefined")) {
+            location.setPhone(phone.get());
+        }
+        if (!web_url.get().equals("undefined")) {
+            location.setWeb_url(web_url.get());
+        }
+
+            location.setName(name);
+
+            location.setAddress_string(address_string.get());
+            location.setLatitude(latitude);
+            location.setLongitude(longitude);
+            location.setLocation_idd((int) session.getAttribute("id"));
+
+            locationsDao.save(location);
+
 
 
         Trip trip = (Trip) session.getAttribute("trip");
@@ -148,7 +150,7 @@ public class TripController {
 
         trip_locationDao.save(trip_location);
 
-        Locations locations = locationsDao.getLocationByName(name);
+        Locations locations = locationsDao.getReferenceById(trip_location.getLocations().getId());
         locations.setTrip_location(trip_location);
         locationsDao.save(locations);
 

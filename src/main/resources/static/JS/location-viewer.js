@@ -8,15 +8,20 @@ function locationViewer() {
         .then(response => response.json())
         .then(response => {
             console.log(response);
-            document.getElementById("picture").value = response.data[0].images.large.url
-            for (let i = 0; i < response.data.length; i++) {
-                setTimeout(function () {
-                    html = ""
-                    html += `<img src="${response.data[i].images.large.url}">`
-                    document.getElementById("display").innerHTML += html
-                }, 100)
+            if (response.data[0] === undefined) {
 
+            } else {
+                document.getElementById("picture").value = response.data[0].images.large.url
+                for (let i = 0; i < response.data.length; i++) {
+                    setTimeout(function () {
+                        html = ""
+                        html += `<img src="${response.data[i].images.large.url}">`
+                        document.getElementById("display").innerHTML += html
+                    }, 100)
+
+                }
             }
+
         })
         .catch(err => console.error(err));
 }
@@ -34,12 +39,33 @@ function addTitle() {
             let title = document.getElementById("title")
             let html = ""
             html += `<h4>${response.name}</h4>`
-            html += `<h6>${response.address_obj.address_string}</h6>`
-            html += `<h6>Phone: ${response.phone}</h6>`
-            html += `<h6>Rating: ${response.rating}</h6>`
-            html += `<h6>Website: <a href="${response.website}">${response.website}</a></h6>`
+            if (response.address_obj.address_string !== undefined) {
+                html += `<h6>${response.address_obj.address_string}</h6>`
+            } else {
+                html += "<h6>No Address Listed</h6>"
+            }
+            if (response.phone !== undefined) {
+                html += `<h6>Phone: ${response.phone}</h6>`
+            } else {
+                html += `<h6>No Phone Number Listed</h6>`
+            }
+            if (response.rating !== undefined) {
+                html += `<h6>Rating: ${response.rating}</h6>`
+            } else {
+                html += `<h6>No Rating Listed</h6>`
+            }
+            if (response.website !== undefined) {
+                html += `<h6>Website: <a href="${response.website}">${response.website}</a></h6>`
+            }
+            else {
+                html += `<h6>No Website Listed</h6>`
+            }
+
+
+
             title.innerHTML = html
             document.getElementById("name").value = response.name
+
             document.getElementById("web_url").value = response.web_url
             document.getElementById("address_string").value = response.address_obj.address_string
             document.getElementById("latitude").value = response.latitude

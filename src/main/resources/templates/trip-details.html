@@ -49,13 +49,21 @@ Choose Your Trip Details:
             End Time:
             <p th:text="${it.getEnd_time}"></p>
 
+            <span th:if="${train[i.index].getRating() != 0}">
+					Rating:
+					<p th:text="${train[i.index].getRating()}"></p>
+            </span>
+            <span th:unless="${train[i.index].getRating() != 0}"></span>
+            <span th:if="${train[i.index].getPhone() != null}">
+					Phone:
+					<p th:text="${train[i.index].getPhone()}"></p>
+            </span>
+            <span th:unless="${train[i.index].getPhone() != null}"></span>
+            <span th:if="${train[i.index].getWeb_url() != null}">
+					<a th:href="${train[i.index].getWeb_url()}">Website</a>
+            </span>
+            <span th:unless="${train[i.index].getWeb_url() != null}"></span>
 
-            Rating:
-            <p th:text="${train[i.index].getRating()}"></p>
-            Phone:
-            <p th:text="${train[i.index].getPhone()}"></p>
-
-            <a th:href="${train[i.index].getWeb_url()}">Website</a>
         </div>
         </div>
         </div>

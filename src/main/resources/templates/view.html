@@ -23,23 +23,32 @@
 				<div class="card-body m-2">
 					Date:
 					<p th:text="${trips[i.index].getStart_date}"></p>
+					Location:
+					<h3 th:text="${locations.getName()}"></h3>
+					Address:
+					<p th:text="${locations.getAddress_string()}"></p>
 					Start Time:
 					<p th:text="${trips[i.index].getStart_time}"></p>
 					End Time:
 					<p th:text="${trips[i.index].getEnd_time}"></p>
-					Location:
-					<p th:text="${locations.getName()}"></p>
-					Address:
-					<p th:text="${locations.getAddress_string()}"></p>
+					<span th:if="${locations.getRating() != 0}">
 					Rating:
 					<p th:text="${locations.getRating()}"></p>
+					</span>
+					<span th:unless="${locations.getRating() != 0}"></span>
+					<span th:if="${locations.getPhone() != null}">
 					Phone:
 					<p th:text="${locations.getPhone()}"></p>
-					
+					</span>
+					<span th:unless="${locations.getPhone() != null}"></span>
+					<span th:if="${locations.getWeb_url() != null}">
 					<a th:href="${locations.getWeb_url()}">Website</a>
-					
+					</span>
+					<span th:unless="${locations.getWeb_url() != null}"></span>
+					<span th:if="${!locations.getPicture.equals('')}">
 					<img th:src="${locations.getPicture}" class="card-img" alt="">
-					
+					</span>
+					<span th:unless="${!locations.getPicture().equals('')}"></span>
 					<form th:action="@{/view}" th:method="post" onsubmit="return confirm('Are you sure you want to remove?');">
 						<button type="submit" name="locationId" th:value="${trips[i.index].getId}" class="btn btn-info mt-2">Remove location</button>
 					</form>
