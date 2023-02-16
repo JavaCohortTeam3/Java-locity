@@ -23,7 +23,7 @@
 	<div class="card divCardEachProfile bg-dark" th:each="search : ${trip}">
 		<div class="card-body">
 			Locale:
-			<p th:text="${search.getName()}"></p>
+			<h3 th:text="${search.getName()}"></h3>
 			Start Date:
 			<p th:text="${search.getStartDate()}"></p>
 			End Date:
