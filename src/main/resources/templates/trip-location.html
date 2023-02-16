@@ -16,19 +16,23 @@
 <nav th:insert="~{partials :: navbar}"></nav>
 <input type="hidden" th:value="${mapKey}" id="mapKey">
 <h1 class="d-flex justify-content-center mt-2">Plan your trip</h1>
-<p class="d-flex justify-content-center">Here you can select the dates and start location of your trip:</p>
-<p class="d-flex justify-content-center" id="instructions_dates_start">* Select your trip start date</p>
-<p class="d-flex justify-content-center" id="instructions_dates_end">* Select your trip end date</p>
-<p class="d-flex justify-content-center" id="instructions_locationSearch">* Select your trip location by searching the map </p>
-<p class="d-flex justify-content-center" id="instructions_dates_end_after_start">* Your trip end date must be equal to or after your trip start date!</p>
+
+<p class="pLocationViewer d-flex justify-content-center">Here you can select the dates and start location of your trip:</p>
+<p class="pLocationViewer d-flex justify-content-center" id="instructions_dates_start">1. Select your trip start date</p>
+<p class="pLocationViewer d-flex justify-content-center" id="instructions_dates_end">2. Select your trip end date</p>
+<p class="pLocationViewer d-flex justify-content-center" id="instructions_locationSearch">3. Select your trip location by searching the map </p>
+<p class="pLocationViewer d-flex justify-content-center" id="instructions_dates_end_after_start">Your trip end date must be equal to or after your trip start date!</p>
+
 <div class="d-flex justify-content-center mt-3">
     <form th:action="@{/trip/locations}" th:method="post">
         <input type="hidden" name="title" id="title">
         <input type="hidden" name="location" id="location">
-        Trip Start: <input type="date" name="begin" id="begin"
+	    <label class="tripLocationLabel">Trip Start: </label>
+        <input class="tripLocationInput" type="date" name="begin" id="begin"
                            placeholder="dd-mm-yyyy" value=""
                            min="1997-01-01" max="2030-12-31" required>
-        Trip End: <input type="date" name="end" id="end"
+	    <label class="tripLocationLabel">Trip End: </label>
+        <input class="tripLocationInput" type="date" name="end" id="end"
                          placeholder="dd-mm-yyyy" value=""
                          min="1997-01-01" max="2030-12-31" required>
         <button class="btn btn-info m-1" id="submission">Submit</button>

@@ -10,9 +10,9 @@
 <nav th:insert="~{partials :: navbar}"></nav>
 <input type="hidden" th:value="${tripKey}" id="tripKey">
 <h1 class="d-flex justify-content-center mt-3">Trip selection information</h1>
-<p class="d-flex justify-content-center mt-3">This is information about your selected hotel, restaurant, or attraction.</p>
-
-<form class="ms-2" th:action="@{/location/viewer}" th:method="post">
+<p class="d-flex justify-content-center mt-3 pLocationViewer">This is information about your selected hotel, restaurant, or attraction.</p>
+<div class="d-flex justify-content-center divLocationViewer">
+<form class="ms-2 formLocationViewer" th:action="@{/location/viewer}" th:method="post">
 <input type="hidden" name="hidden" th:value="${id}" id="hidden">
 <input type="hidden" name="name" id="name">
 <input type="hidden" name="web_url" id="web_url">
@@ -26,15 +26,17 @@
 
 
 
-
-<div id="title"></div>
+<div id="title" class="titleLocationViewer"></div>
+	<div class="saveLocationViewer">
 Start Time:
 <h6 th:text="${start}"></h6>
 End Time:
 <h6 th:text="${end}"></h6>
 <button class="btn btn-info m-2">Save to Trip</button>
+	</div>
 </form>
-<div class="m-1" id="display"></div>
+</div>
+<div class="picturesLocationViewer" id="display"></div>
 <footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
