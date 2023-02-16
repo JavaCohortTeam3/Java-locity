@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Planned Trip</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/images/logo.png}">
-    <div th:insert="~{partials :: header}"></div>
-    <div th:replace="~{partials :: css}"></div>
+	<title>Planned Trip</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/images/logo.png}">
+	<div th:insert="~{partials :: header}"></div>
+	<div th:replace="~{partials :: css}"></div>
 </head>
 <body>
-<nav th:insert="~{partials :: navbar}"></nav>
-<div class="col-md-6">
-
-
-    <div class="card-columns">
-
-        <div class="card bg-dark m-2" th:each="locations : ${locations}">
-
-            <div class="card-body m-2">
-                Location:
-                <h3 th:text="${locations.getName()}"></h3>
-                Address:
-                <p th:text="${locations.getAddress_string()}"></p>
-
-                <span th:if="${locations.getRating() != 0}">
+	<nav th:insert="~{partials :: navbar}"></nav>
+	
+	
+	
+	<div class="viewedDiv">
+		<h1 class="viewedH1">Trip Suggestion</h1>
+		
+		<div class="card viewedDivEach bg-dark m-2" th:each="locations : ${locations}">
+			
+			<div class="card-body m-2">
+				Location:
+				<h3 th:text="${locations.getName()}"></h3>
+				Address:
+				<p th:text="${locations.getAddress_string()}"></p>
+				
+				<span th:if="${locations.getRating() != 0}">
 					Rating:
 					<p th:text="${locations.getRating()}"></p>
 					</span>
-                <span th:unless="${locations.getRating() != 0}"></span>
-                <span th:if="${locations.getPhone() != null}">
+				<span th:unless="${locations.getRating() != 0}"></span>
+				<span th:if="${locations.getPhone() != null}">
 					Phone:
 					<p th:text="${locations.getPhone()}"></p>
 					</span>
-                <span th:unless="${locations.getPhone() != null}"></span>
-                <span th:if="${locations.getWeb_url() != null}">
+				<span th:unless="${locations.getPhone() != null}"></span>
+				<span th:if="${locations.getWeb_url() != null}">
 					<a th:href="${locations.getWeb_url()}">Website</a>
 					</span>
-                <span th:unless="${locations.getWeb_url() != null}"></span>
-                <span th:if="${!locations.getPicture.equals('')}">
+				<span th:unless="${locations.getWeb_url() != null}"></span>
+				<span th:if="${!locations.getPicture.equals('')}">
 					<img th:src="${locations.getPicture}" class="card-img" alt="">
 					</span>
-                <span th:unless="${!locations.getPicture().equals('')}"></span>
-
-            </div>
-        </div>
-    </div>
-
-    <footer th:replace="~{partials :: footer}"></footer>
+				<span th:unless="${!locations.getPicture().equals('')}"></span>
+			
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="~{partials :: footer}"></footer>
 </body>
 </html>
 
