@@ -20,10 +20,12 @@
     <form th:action="@{/trip/locations}" th:method="post">
         <input type="hidden" name="title" id="title">
         <input type="hidden" name="location" id="location">
-        Trip Start: <input type="date" name="begin"
+	    <label class="tripLocationLabel">Trip Start: </label>
+        <input class="tripLocationInput" type="date" name="begin"
                            placeholder="dd-mm-yyyy" value=""
                            min="1997-01-01" max="2030-12-31" required>
-        Trip End: <input type="date" name="end"
+	    <label class="tripLocationLabel">Trip End: </label>
+        <input class="tripLocationInput" type="date" name="end"
                          placeholder="dd-mm-yyyy" value=""
                          min="1997-01-01" max="2030-12-31" required>
         <button class="btn btn-info m-1" id="submission">Submit</button>

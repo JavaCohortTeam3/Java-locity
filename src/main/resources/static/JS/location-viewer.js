@@ -12,7 +12,7 @@ function locationViewer() {
             for (let i = 0; i < response.data.length; i++) {
                 setTimeout(function () {
                     html = ""
-                    html += `<img src="${response.data[i].images.large.url}">`
+                    html += `<img class="imgLocationViewer" src="${response.data[i].images.large.url}">`
                     document.getElementById("display").innerHTML += html
                 }, 100)
 

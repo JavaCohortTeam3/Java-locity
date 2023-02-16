@@ -55,7 +55,7 @@ function getPics(array) {
                     html = ""
 
                     html += `<div class ="container">`
-                    html += `<button class="btn bg-warning btn-outline-dark m-2" name="idd" value="${response.location_id}">`
+                    html += `<button class="btn cardDivLocationBtn bg-warning btn-outline-dark m-2" name="idd" value="${response.location_id}">`
                     html += `<h4>${response.name}</h4>`
                     html += `<h6>Rating: ${response.rating}</h6>`
                     html += `<h6>${response.address_obj.address_string}</h6>`

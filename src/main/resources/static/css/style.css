@@ -39,3 +39,92 @@ h3 {
     text-shadow : 2px 2px 2px #1d2731;
 }
 
+.tripLocationLabel{
+    margin-right: 10px;
+}
+
+.tripLocationInput{
+    margin-right: 100px;
+}
+.formFinalizeTrip{
+display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.buttonFinalizeTrip{
+    margin: 5px;
+}
+
+.tripDetailsSelect{
+margin-left: 15px;
+}
+
+.tripDetailsInput{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.pTripDetails{
+    font-size: larger;
+}
+
+.chooseTripDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardDivLocationBtn {
+    width: 75%;
+}
+
+.tripDetailsForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.pLocationViewer{
+    font-size: larger;
+}
+
+.formLocationViewer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d2731;
+    margin-bottom: 20px;
+    width: 75%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.saveLocationViewer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1d2731;
+    flex-direction: column;
+}
+
+.titleLocationViewer{
+    background-color: #1d2731;
+    padding-left: 10px;
+}
+
+.divLocationViewer{
+}
+
+.picturesLocationViewer{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+.imgLocationViewer{
+    margin-bottom: 10px;
+    border: 5px solid #1d2731;
+}
