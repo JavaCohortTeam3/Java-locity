@@ -19,7 +19,7 @@
             <label for="username">Username:</label>
             <input type="text" class="inputTextChange form-control bg-transparent text-warning" id="username" th:field="*{username}"/>
             <!--Error message if user is trying to register a username that already exists in db-->
-            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use,
+            <div class="m-1 customTextForRegister" th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use,
                 please enter another username.
             </div>
             <div class="m-1 customTextForRegister" id="usernameIsEmpty">Username Is Required</div>
@@ -30,7 +30,7 @@
             <label for="email">Email:</label>
             <input type="email" class="form-control inputTextChange bg-transparent text-warning" id="email" th:field="*{email}"/>
             <!--Error message if user is trying to register an email that already exists in db-->
-            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}"/> is already in use, please enter
+            <div class="m-1 customTextForRegister" th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}"/> is already in use, please enter
                 another email
             </div>
             <div class="m-1 customTextForRegister" id="emailIsEmpty">Email Is Required</div>

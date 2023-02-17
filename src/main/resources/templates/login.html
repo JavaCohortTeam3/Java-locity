@@ -11,10 +11,10 @@
 <nav th:insert="~{partials :: navbar}"></nav>
 <div class="container">
     <h1 class="d-flex justify-content-center mt-3">Log In to Enjoy Our Service!</h1>
-    <div th:if="${param.error}">
+    <div class="m-1 customTextForRegister" th:if="${param.error}">
         Invalid Username and Password.
     </div>
-    <div th:if="${param.logout}">
+    <div class="m-1 customTextForRegister" th:if="${param.logout}">
         You have been logged out.
     </div>
     <form class="form-group" th:action="@{/login}" method="post">

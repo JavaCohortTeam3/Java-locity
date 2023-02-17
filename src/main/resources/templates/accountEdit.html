@@ -15,25 +15,25 @@
         <input type="hidden" id="id" th:field="*{id}">
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control bg-transparent text-warning" id="username" th:field="*{username}"/>        <!--Error message if user is trying to register a username that already exists in db-->
-            <div th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use, please enter another username.</div>
+            <input type="text" class="form-control inputTextChange bg-transparent text-warning" id="username" th:field="*{username}"/>        <!--Error message if user is trying to register a username that already exists in db-->
+            <div class="m-1 customTextForRegister" th:if="${usernameAlreadyInUse}">The username <span th:text="${usernameInUse}"/> is already in use, please enter another username.</div>
 
             <br>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control bg-transparent text-warning" id="email" th:field="*{email}"/>
+            <input type="email" class="form-control inputTextChange bg-transparent text-warning" id="email" th:field="*{email}"/>
             <!--Error message if user is trying to register an email that already exists in db-->
-            <div th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}" />  is already in use, please enter another email</div>
+            <div class="m-1 customTextForRegister" th:if="${emailAlreadyInUse}">The email <span th:text="${emailInUse}" />  is already in use, please enter another email</div>
 
             <br>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control bg-transparent text-warning" id="password"
+            <input type="password" class="form-control inputTextChange bg-transparent text-warning" id="password"
                    th:field="*{password}"/>
             <div id="passwordIsEmpty">Please Enter Your Current Password</div>
-            <div th:if="${incorrectPW}">The password you entered is incorrect.</div>
+            <div class="m-1 customTextForRegister" th:if="${incorrectPW}">The password you entered is incorrect.</div>
             <br>
         </div>
         <button type="submit" id="SubmitButton" class="btn btn-info mt-2">Submit</button>
