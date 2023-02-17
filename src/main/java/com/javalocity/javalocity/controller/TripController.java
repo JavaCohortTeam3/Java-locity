@@ -57,10 +57,10 @@ public class TripController {
         trip.setName(title);
         trip.setDescription(location);
         trip.setUser(user);
-        if (tripDao.findByStartDate(trip.getStartDate()) == null || tripDao.findByEndDate(trip.getEndDate()) == null) {
+
             tripDao.save(trip);
 
-        }
+
         session.setAttribute("location", location);
         session.setAttribute("trip", trip);
         return "redirect:/trip/details";
